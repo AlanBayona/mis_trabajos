@@ -8,6 +8,19 @@
 #ifndef UTN_H_
 #define UTN_H_
 
-int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError, int  minimo, int maximo, int reintentos);
+typedef struct{
+	float ladoUno;
+	float ladoDos;
+	float ladoTres;
+}eTriangulo;
 
+int triangulo_cargar(eTriangulo* myEscaleno);
+float ingresarFloat(char mensaje[]);
+
+
+int arrayPromedio(int valores_ingresado[], int largo);
+int sumarEnteros(int* pResultado, int numero_uno, int numero_dos);
+int sumarFlotante(float* pResultado, float numero_uno, float numero_dos);
+int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError, int  minimo, int maximo, int reintentos);
+int utn_getFloat(float* pResultado, char* mensaje, char mensajeError, int minimo, int maximo, int reintentos);
 #endif /* UTN_H_ */

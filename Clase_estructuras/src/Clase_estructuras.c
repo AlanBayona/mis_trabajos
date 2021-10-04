@@ -1,6 +1,6 @@
 /*
  ============================================================================
- Name        : Experimento_funciones.c
+ Name        : Clase_estructuras.c
  Author      : 
  Version     :
  Copyright   : Your copyright notice
@@ -11,13 +11,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "utn.h"
+#include "Triangulo.h"
 
 int main()
 {
-	eTriangulo escaleno={2, 5, 6}
+	eTriangulo escaleno={2, 5, 6};
 
-	triangulo
+	triangulo_cargar(&escaleno);
 
 
 	return 0;
