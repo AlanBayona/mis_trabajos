@@ -12,6 +12,9 @@
 #define LCD    0
 #define LED    1
 
+#define OCUPADO  0
+#define LIBRE   1
+
 typedef struct {
 	int type;
 	float price;
@@ -21,10 +24,13 @@ typedef struct {
 	int flagEmpty; // 0:ocupado 1:vacio/libre
 }Display;
 
+void mostrarPantallasConId(Display displaysList[], int len);
+int buscarPorId(Display displaysList[], int len);
+int buscarLugarVacio(Display displaysList[], int len);
 int disp_initList(Display displaysList[], int len);
 int disp_loadDisplay(Display* pDisplay);
 int utn_getFloat(float* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos);
 
-
+int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos);
 
 #endif /* PANTALLA_H_ */

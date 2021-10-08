@@ -14,7 +14,7 @@
 
 #define TAM 20
 
-
+int comprobadorTexto(char cadena[]);
 int esNumerica(char cadena[], int tamanio);
 
 int main(void) {
@@ -85,9 +85,40 @@ int esNumerica(char cadena[], int tamanio)
 
 
 
-//int esTexto(char cadena[]){}
+int comprobadorTexto(char cadena[])
+{
+	int deteccion=0;
+	int i;
+
+	if(cadena!=NULL)
+	{
+		for(i=0; i<strlen(cadena); i++){
+			if((cadena[i]>=65 && cadena[i]<91) || (cadena[i]>96 && cadena[i]<=122))
+			{
+				fflush(stdin);
+				printf("El caracter valido es: %c\n", cadena[i]);
+			} else {
+				printf("Fuera del rango: %c\n", cadena[i]);
+				deteccion=-1;
+			}
+		}
+	} else
+	{
+		deteccion=-1;
+	}
+
+
+	return deteccion;
+}
 
 //int esAlFanumerica(char cadena[]){}
 
-//int esMail(char[]){}
+int esMail(char[])
+{
+	int deteccion=0;
+	int i;
+}
+
+
+
 

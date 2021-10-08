@@ -20,8 +20,17 @@ int main(void) {
 	setbuf(stdout, NULL);
 
 	Display displaysList[DISPLAYS_LEN];
+	int verficacion;
 
 	disp_initList(displaysList, DISPLAYS_LEN);
+
+	if(buscarLugarVacio(&displaysList, DISPLAYS_LEN)>0)
+	{
+		printf("Este el lugar disponible [%d]", buscarLugarVacio(&displaysList, DISPLAYS_LEN));
+	} else
+	{
+		puts("Malio sal");
+	}
 
 
 

@@ -14,10 +14,18 @@ typedef struct{
 	float ladoTres;
 }eTriangulo;
 
+//triangulo
 int triangulo_cargar(eTriangulo* myEscaleno);
-float ingresarFloat(char mensaje[]);
 
 
+
+
+//cadena de caracteres
+
+int comprobadorTexto(char cadena[]);
+
+
+int myGets(char* cadena, int len);
 int arrayPromedio(int valores_ingresado[], int largo);
 int sumarEnteros(int* pResultado, int numero_uno, int numero_dos);
 int sumarFlotante(float* pResultado, float numero_uno, float numero_dos);
