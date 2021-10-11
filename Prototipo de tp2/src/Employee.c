@@ -17,23 +17,60 @@ int   id;
 #include "Inputs.h"
 
 
-void IncializarLista(Employee list[], int len)
+int initEmployees(Employee list[], int len)
 {
+	int deteccion;
+	deteccion=-1;
 	if(list!=NULL && len>0)
 	{
 		for(int i=0; i<len; i++)
 		{
+
 			list[i].isEmpty=0;//significa que esta vacio
 		}
-	} else {
-		puts("ERROR. Programador, verifique los parametros que ingreso.");
+		deteccion=0;
 	}
+
+	return deteccion;
 }
 
 
 //Funciones del ALTA
 
-int cargarListaDeEmpleados(Employee list[], int len)
+
+int addEmployee(Employee* list, int len, int id, char name[],char 	lastName[],float salary,int sector)
+{
+	int check;
+	int index;
+
+	if(list!=NULL && len>0 && id>0 && name!=NULL && lastName!=NULL && salary!=NULL && sector>0)
+	{
+		if((index=findEmpty(&list, len))==0)
+		{
+			list->id[index]=id;
+			list->name[index]=name;
+			list->lastName[index]=lastName;
+			list->salary[index]=salary;
+			list->sector[index]=sector;
+		}
+	}
+
+
+
+
+
+
+	return check;
+}
+
+
+
+
+
+
+
+
+int addEmployees(Employee list[], int len)
 {
 	int deteccion;
 
@@ -69,23 +106,33 @@ int cargarListaDeEmpleados(Employee list[], int len)
 
 
 
-void mostrarLista(Employee list[], int len)
+int printEmployees(Employee* list, int length)
+
 {
-	printf("\tLista del ID:\n");
-	for(int i=0; i<len; i++)
+	int deteccion;
+	deteccion=-1;
+
+	if(list!=NULL && length>0)
 	{
-		if(list[i].isEmpty==1)
+		printf("\tLista del ID:\n");
+		for(int i=0; i< length; i++)
 		{
-			printf("* ID: %d\n", list[i].id);
-			printf("\tName: %s\n",list[i].name);
-			printf("\tLastName: %s\n",list[i].lastName);
-			printf("\tSalary: %f\n",list[i].salary);
-			printf("\tSector: %d\n",list[i].sector);
+			if(list[i].isEmpty==1)
+			{
+				printf("* ID: %d\n", list[i].id);
+				printf("\tName: %s\n",list[i].name);
+				printf("\tLastName: %s\n",list[i].lastName);
+				printf("\tSalary: %f\n",list[i].salary);
+				printf("\tSector: %d\n",list[i].sector);
+			}
 		}
+		deteccion=0;
 	}
+
+	return deteccion;
 }
 
-int buscarLugarVacio(Employee list[], int len)
+int findEmpty(Employee list[], int len)
 {
 	int index;
 	index=-1;

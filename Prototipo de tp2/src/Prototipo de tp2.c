@@ -19,8 +19,8 @@ int main(void) {
 
 	Employee employeesList[LEN]={{12,"HOLA","Auget",3.1415,4,1},{13,"Jaqui","Maru",30.9,2,1}};
 
-	IncializarLista(&employeesList, LEN);
-	mostrarLista(&employeesList, LEN);
+	initEmployees(&employeesList, LEN);
+	printEmployees(&employeesList, LEN);
 
 
 

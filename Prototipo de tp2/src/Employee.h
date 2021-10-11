@@ -18,13 +18,13 @@ typedef struct{
 
 }Employee;
 
-void IncializarLista(Employee list[], int len);
+int initEmployees(Employee list[], int len);
 
 
 //Funciones de la parte ALTA
-void mostrarLista(Employee list[], int len);
-int buscarLugarVacio();
-int cargarListaDeEmpleados();
+void printEmployees(Employee list[], int len);
+int findEmpty(Employee list[], int len);
+int addEmployee(Employee* list, int len, int id, char name[],char 	lastName[],float salary,int sector);
 int crearId(void);
 
 //Funciones para modificar
