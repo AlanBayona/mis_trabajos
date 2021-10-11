@@ -29,6 +29,6 @@ int myGets(char* cadena, int len);
 int arrayPromedio(int valores_ingresado[], int largo);
 int sumarEnteros(int* pResultado, int numero_uno, int numero_dos);
 int sumarFlotante(float* pResultado, float numero_uno, float numero_dos);
-int PedirTipoInt(int* pResultado, char* mensaje, char* mensajeError, int  minimo, int maximo, int reintentos);
-int PedirTipoFloat(float* pResultado, char* mensaje, char mensajeError, int minimo, int maximo, int reintentos);
+int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError, int  minimo, int maximo, int reintentos);
+int utn_getFloat(float* pResultado, char* mensaje, char mensajeError, int minimo, int maximo, int reintentos);
 #endif /* UTN_H_ */
