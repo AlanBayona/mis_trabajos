@@ -14,10 +14,12 @@
 
 #define LEN 2
 
+
+
 int main(void) {
 	setbuf(stdout, NULL);
 
-	Employee employeesList[LEN]={{12,"HOLA","Auget",3.1415,4,1},{13,"Jaqui","Maru",30.9,2,1}};
+	Employee employeesList[LEN]={{12,"Alan","Auget",3.1415,4,1},{13,"Hobbs","Maru",30.9,2,1}};
 
 	initEmployees(&employeesList, LEN);
 	printEmployees(&employeesList, LEN);
@@ -26,3 +28,5 @@ int main(void) {
 
 	return EXIT_SUCCESS;
 }
+
+

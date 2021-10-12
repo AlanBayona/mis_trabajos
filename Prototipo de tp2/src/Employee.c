@@ -12,6 +12,7 @@ int   id;
 	int   sector;
 	int   isEmpty;*/
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "Employee.h"
 #include "Inputs.h"
@@ -70,13 +71,10 @@ int addEmployee(Employee* list, int len, int id, char name[],char lastName[],flo
 
 
 
-int addEmployees(Employee list[], int len)
+/*int addEmployees(Employee list[], int len)
 {
 	int deteccion;
-
 	Employee listaAuxiliar;
-
-
 		if(list!=NULL && len>0)
 		{
 			if(myGets(listaAuxiliar.name, len)!=-1)
@@ -102,7 +100,7 @@ int addEmployees(Employee list[], int len)
 		}
 
 	return deteccion;
-}
+}*/
 
 
 
@@ -158,23 +156,94 @@ int findEmpty(Employee list[], int len)
 
 //funciones Modificacion
 
-int findEmployeeById(Employee* list, int len,int id)
+int modifyEmployeebyId(Employee* list, int len, int id, int option)
 {
-  int check;
-  int index;
-
-  if(list!=NULL && len>0 && id>0 && id!=NULL)
-  {
-
-  }
+	int check;
+	int indexEmployee;
+	check=-1;
 
 
+		if(list!=NULL && len>0)
+		{
+			indexEmployee=findEmployeeById(&list, len, id);
+			switch(option)
+			{
+			  case 1:
+
+			}
+
+		}
 
 
- return check;
+
+	return check;
 }
 
 
+int findEmployeeById(Employee* list, int len,int id)
+{
+  int index;
+  index=-1;
+
+		  if(list!=NULL && len>0 && id>0 && id!=NULL)
+		  {
+			  for(int i=0; i<len; i++)
+			  {
+				  if(list[i].id==id)
+				  {
+					  index=i;
+					  break;
+				  }
+			  }
+		  }
+		  	 return index;
+}
+
+
+
+//funcion de BAJA
+
+
+int removeEmployee(Employee* list, int len, int id)
+{
+	int check;
+	check=-1;
+		if(list!=NULL && len>0 && id!=NULL)
+		{
+			for(int i=0; i<len; i++)
+			{
+				if(list[i].id==id)
+				{
+					list[i].isEmpty=0;
+					check=0;
+					break;
+				}
+			}
+		}
+
+
+
+	return check;
+}
+
+
+
+
+
+
+
+void seeMenu(){
+
+	puts("\n ======================== BIENVENIDO =========================");
+	puts("*                                                              *");
+	printf("*---------------\t\tMENU\t\t---------------*\n");
+	puts("* OPCIONES:                                                    *");
+	puts("*  1. ALTA.                                                    *");
+	puts("*\t2. MODIFICAR.                                           *");//un \t equivale a 7 asteriscos(*)
+	puts("*\t\t3. BAJA.                                       *");
+	puts("*\t\t\t4. INFORMAR.                           *");
+	puts("************************ ..:5) Salir:.. ************************");
+}
 
 
 

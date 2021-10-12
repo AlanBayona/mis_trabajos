@@ -18,7 +18,9 @@ typedef struct{
 
 }Employee;
 
+void seeMenu();
 int initEmployees(Employee list[], int len);
+
 
 
 //Funciones de la parte ALTA
@@ -34,7 +36,7 @@ int findEmployeeById(Employee* list, int len,int id);
 
 //Funciones para la baja
 
-
+int removeEmployee(Employee* list, int len, int id);
 
 
 #endif /* EMPLOYEE_H_ */
