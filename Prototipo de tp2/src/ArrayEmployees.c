@@ -11,10 +11,11 @@ int   id;
 	float salary;
 	int   sector;
 	int   isEmpty;*/
+#include "ArrayEmployees.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "Employee.h"
 #include "Inputs.h"
 
 

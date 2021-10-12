@@ -5,8 +5,8 @@
  *      Author: cesar
  */
 
-#ifndef EMPLOYEE_H_
-#define EMPLOYEE_H_
+#ifndef ARRAYEMPLOYEES_H_
+#define ARRAYEMPLOYEES_H_
 
 typedef struct{
 	int   id;
@@ -39,4 +39,4 @@ int findEmployeeById(Employee* list, int len,int id);
 int removeEmployee(Employee* list, int len, int id);
 
 
-#endif /* EMPLOYEE_H_ */
+#endif /* ARRAYEMPLOYEES_H_ */
