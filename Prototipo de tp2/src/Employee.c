@@ -38,7 +38,7 @@ int initEmployees(Employee list[], int len)
 //Funciones del ALTA
 
 
-int addEmployee(Employee* list, int len, int id, char name[],char 	lastName[],float salary,int sector)
+int addEmployee(Employee* list, int len, int id, char name[],char lastName[],float salary,int sector)
 {
 	int check;
 	int index;
@@ -152,6 +152,36 @@ int findEmpty(Employee list[], int len)
 
 	return index;
 }
+
+
+
+
+//funciones Modificacion
+
+int findEmployeeById(Employee* list, int len,int id)
+{
+  int check;
+  int index;
+
+  if(list!=NULL && len>0 && id>0 && id!=NULL)
+  {
+
+  }
+
+
+
+
+ return check;
+}
+
+
+
+
+
+
+
+
+
 
 
 

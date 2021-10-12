@@ -29,6 +29,9 @@ int crearId(void);
 
 //Funciones para modificar
 
+int findEmployeeById(Employee* list, int len,int id);
+
+
 //Funciones para la baja
 
 
