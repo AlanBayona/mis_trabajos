@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Pantalla.h"
+#include "Inputs.h"
 
 
 //Modificacion//acá empieza las funciones de modificación
@@ -239,67 +240,6 @@ int disp_loadDisplay(Display* pDisplay)
 }
 
 
-
-int utn_getFloat(float* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos)
-{
-	int deteccion;
-	int i;
-	float bufferFloat;// esta variable es un auxiliar para poder pasar el dato por puntero
-	deteccion=-1;
-
-	if(pResultado!=NULL && mensaje!=NULL && mensajeError!=NULL && minimo<=maximo && reintentos!=0)
-	{
-		for(i=0; i<reintentos; i++)
-		{
-			printf("%s", mensaje);
-			scanf("%f", bufferFloat);
-			if(bufferFloat>minimo && bufferFloat<maximo)
-			{
-			//la condicion de minimo y max debe cambiar , cuando aprende bien cadena de caracteres
-				deteccion=0;
-				*pResultado=bufferFloat;
-				break;
-			}
-			else
-			{
-				printf("%s", mensajeError);
-			}
-		}
-
-	}
-		return deteccion;
-}
-
-
-int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos)
-{
-	int deteccion= -1;
-	int bufferInt;
-	int i;
-
-	 for(i=0; i<reintentos; i++)
-	 {
-		if(pResultado!=NULL && mensaje!= NULL && mensajeError!=NULL && minimo<=maximo && reintentos>=0)
-		{
-			printf("%s", mensaje);
-			scanf("%d",&bufferInt);
-			if(bufferInt>=minimo && bufferInt<=maximo)
-			{
-				*pResultado=bufferInt;
-				deteccion=0;
-				break;
-			} else
-			{
-				printf("%s", mensajeError);
-			}
-
-		}
-
-	 }
-
-
-		return deteccion;
-}
 
 
 

@@ -9,6 +9,9 @@
 #include <string.h>
 #include "Contratacion.h"
 
+#define LIBRE 0
+#define OCUPADO 1
+
 /*
  * int idcontratacion;
 	int isEmpty;
