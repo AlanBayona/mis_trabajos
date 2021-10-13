@@ -25,12 +25,10 @@ typedef struct {
 }Display;
 
 void mostrarPantallasConId(Display displaysList[], int len);
+int modificarPantalla(Display displaysList[], int len, int id);
 int buscarPorId(Display displaysList[], int len);
 int buscarLugarVacio(Display displaysList[], int len);
 int disp_initList(Display displaysList[], int len);
 int disp_loadDisplay(Display* pDisplay);
-int utn_getFloat(float* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos);
-
-int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos);
 
 #endif /* PANTALLA_H_ */
