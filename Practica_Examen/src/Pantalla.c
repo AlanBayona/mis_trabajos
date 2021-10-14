@@ -30,7 +30,7 @@ int modificarPantalla(Display displaysList[], int len)
 		index=buscarPorId(&displaysList, len);
 		if(index>0)
 		{
-			modCamposDePantalla(&dislplaysList, len, index);
+			modCamposDePantalla(&displaysList, len, index);
 		}
 
 	}
@@ -69,12 +69,22 @@ int modCamposDePantalla(Display displaysList[], int len, int index)
 				break;
 
 			case 3:
-				if(myGets(&displaysAux.name, len)==0)
+				if(pedir_texto(&displaysAux.name, "Ingrese el nombre nuevo", "Nono", 3)==0)
 				{
 					deteccion=0;
-					displaysList->name=displaysAux.name;//debo usar la cosa para copiar de un lado al otro
+					strcpy(&displaysList->name, displaysAux.name);
 				}
-								break;
+				break;
+			case 4:
+				if(pedirDireccion(&displaysAux.address, "Ingrese la nueva direccion.", "ERROR", 3)==0)
+				{
+					deteccion=0;
+					strcpy(&displaysList->address, displaysAux.address);
+				}
+				break;
+			case 5:
+				deteccion=5;
+
 
 
 		}
@@ -102,7 +112,7 @@ int modCamposDePantalla(Display displaysList[], int len, int index)
 
 
 
-//función para mostrar todo el array e mio struct
+
 void mostrarPantallasConId(Display displaysList[], int len)
 {
 	if(displaysList!=NULL && len>0){
@@ -120,8 +130,6 @@ void mostrarPantallasConId(Display displaysList[], int len)
 
 
 
-
-//sirve para pedir al usuario cargar una struct
 int disp_initList(Display displaysList[], int len)
 {
 	int deteccion;
@@ -139,9 +147,7 @@ int disp_initList(Display displaysList[], int len)
 		return deteccion;
 }
 
-//función de alta del display
 
-//hacer la funcion buscarPorId
 
 int buscarPorId(Display displaysList[], int len)
 {
@@ -184,14 +190,12 @@ int buscarLugarVacio(Display displaysList[], int len)
 					index=i;
 					break;
 				}
-
-
 			}
-		}
-		else
-		{
-			index=-1;
-		}
+			}
+			else
+			{
+				index=-1;
+			}
 
 		return index;
 }
@@ -199,7 +203,7 @@ int buscarLugarVacio(Display displaysList[], int len)
 
 
 
-
+//funcion de ALTA
 
 int disp_loadDisplay(Display* pDisplay)
 {
@@ -215,15 +219,9 @@ int disp_loadDisplay(Display* pDisplay)
 	{
 		if(utn_getFloat(&precio, "Ingrese precio", "QUe HacEs, Loc0?!",0,10000000.000000,3 )==0)
 		{
-
-			//debe ser cambiado por las funciones que no hice
-			puts("Ingrese un nombre");
-			scanf("%s", &nombre);
-			puts("ingrese direccion");
-			scanf("%s", &direccion);
-			puts("Da una ID diferente(esto es de prueba)");
-			scanf("%d", &id);//debo hacer la verga que no entendi con static
-				if(nombre!=NULL && direccion!=NULL)
+			if(pedir_texto(&nombre, "Ingrese el de la pantalla.", "ERROR", 3)==0)
+			{
+				if(pedirDireccion(&direccion, "Ingrese la direccion", "ERROR", 3)==0)
 				{
 					pDisplay->type=tipo;
 					pDisplay->price=precio;
@@ -232,7 +230,7 @@ int disp_loadDisplay(Display* pDisplay)
 					strcpy(pDisplay->address, direccion);
 					deteccion=0;
 				}
-
+			}
 		}
 	}
 
@@ -241,6 +239,9 @@ int disp_loadDisplay(Display* pDisplay)
 
 
 
+
+
+//funciones de la BAJA
 
 
 
@@ -261,7 +262,9 @@ int disp_loadDisplay(Display* pDisplay)
 
 
 
-int pan_ordenarPorNombre(Pantalla* array,int limite)
+/*
+
+ int pan_ordenarPorNombre(Pantalla* array,int limite)
 {
 	int respuesta = -1;
 	int flagSwap;
@@ -291,3 +294,4 @@ int pan_ordenarPorNombre(Pantalla* array,int limite)
 	}
 	return respuesta;
 }
+*/

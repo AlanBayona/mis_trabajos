@@ -12,7 +12,7 @@ static int validar_Correo(char cadenaDeCaracteres[]);
 static int validarDireccion(char cadenaDeCaracteres[]);
 
 
-
+//Entradas de tipo string
 int pedir_texto(char cadenaDeCaracteres[], char* mensaje, char mensajeError, int reintentos)
 {
 
@@ -40,15 +40,94 @@ int pedir_texto(char cadenaDeCaracteres[], char* mensaje, char mensajeError, int
 			}
 		}
 
+		return deteccion;
 	}
 
-	return deteccion;//0 para si salio bien
+
+
+
+
+int pedirCorreo(char cadenaDeCaracteres[], char* mensaje, char mensajeError, int reintentos)
+{
+	int deteccion;
+	int i;
+	char bufferChar[69];
+	deteccion=-1;
+
+	if(cadenaDeCaracteres!=NULL && mensaje!=NULL && mensajeError!=NULL && reintentos!=0)
+	{
+		for(i=0; i<reintentos; i++)
+		{
+			printf("%s", mensaje);
+			//aca directamente usamos la funcion getFloat para cargar un numero float
+			if(myGets(bufferChar,sizeof(bufferChar))==0 && validar_Correo(bufferChar))//ahi obtendremos la validacion mediante la funcion
+			{
+				deteccion=0;
+				strcpy(cadenaDeCaracteres);
+						break;
+			}
+			else
+			{
+				printf("%s", mensajeError);//mensaje de error por si la cosa se pone complicada xd
+			}
+			}
+		}
+
+		return deteccion;
+}
+
+
+int pedirDireccion(char cadenaDeCaracteres[], char* mensaje, char mensajeError, int reintentos)
+{
+
+	int deteccion;
+	int i;
+	char bufferChar[64];
+	deteccion=-1;
+
+	if(cadenaDeCaracteres!=NULL && mensaje!=NULL && mensajeError!=NULL && reintentos!=0)
+	{
+		for(i=0; i<reintentos; i++)
+		{
+			printf("%s", mensaje);
+			//aca directamente usamos la funcion getFloat para cargar un numero float
+			if(myGets(bufferChar,sizeof(bufferChar))==0 && validarDireccion(bufferChar))//ahi obtendremos la validacion mediante la funcion
+			{
+				deteccion=0;
+				strcpy(cadenaDeCaracteres);
+						break;
+			}
+			else
+			{
+				printf("%s", mensajeError);//mensaje de error por si la cosa se pone complicada xd
+			}
+			}
+		}
+
+		return deteccion;
 }
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Entradas de tipo number
 
 int PedirTipoInt(int* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos)
 {
@@ -140,6 +219,8 @@ int myGets(char cadena[], int len)
 
 
 
+//Las funciones static
+
 static int validarFloat(char cadenaFloat[])//osea aunque sea guardado, al final, en una variable float
 {//de forma discreta fuera de los ojos del usuario. Se esta pidiendo una cadena
 	//Y aca es donde se valida
@@ -159,7 +240,7 @@ static int validarFloat(char cadenaFloat[])//osea aunque sea guardado, al final,
 				{
 						deteccion=0;//osea que esta saliendo bien.
 				}
-				else if(flagPunto=0 && cadenaFloat[i]== 46)
+				else if(flagPunto==0 && cadenaFloat[i]== 46)
 				{
 					flagPunto=-1;
 				} else {
@@ -266,29 +347,6 @@ static int validarTexto(char cadenaDeCaracteres[])
 
 
 
-static int getText(char cadena[], len)
-{
-	int deteccion=-1;
-	char buffer[64];
-
-	if(cadena!=NULL)
-	{
-		if(myGets(buffer,sizeof(buffer))==0 && validarTexto(buffer))//luego con validarFloat, valido si la funcion ingresado por myGet sea numero, en este caso un numero float.
-		{
-			strcpy(cadena,);
-			deteccion=0;
-		}
-	}
-
-	return deteccion;
-}
-
-
-
-
-
-
-
 static int validar_Correo(char cadenaDeCaracteres[])
 {
 	int deteccion;
@@ -330,7 +388,10 @@ static int validarDireccion(char cadenaDeCaracteres[])
 	{
 		for(int i=0; cadenaDeCaracteres[i]!='\0'; i++)
 		{
-				if((cadenaDeCaracteres[i]>='0' && cadenaDeCaracteres[i]<='9')||(cadenaDeCaracteres[i]>='a' && cadenaDeCaracteres[i]<='z')||(cadenaDeCaracteres[i]>='A' && cadenaDeCaracteres[i]<='Z') || cadenaDeCaracteres[i]==96 )//donde 48=0 y 57=9 en ascii
+				if((cadenaDeCaracteres[i]>='0' && cadenaDeCaracteres[i]<='9')
+						||(cadenaDeCaracteres[i]>='a' && cadenaDeCaracteres[i]<='z')
+						||(cadenaDeCaracteres[i]>='A' && cadenaDeCaracteres[i]<='Z')
+						|| cadenaDeCaracteres[i]==96 )//donde 48=0 y 57=9 en ascii
 				{
 					deteccion=0;
 				}
