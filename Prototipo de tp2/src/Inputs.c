@@ -7,10 +7,127 @@ static int validarFloat(char cadenaFloat[]);
 static int getInt(int* pResultado);
 static int getFloat(float* pResultado);
 static int validarEntero(char charDeEnteros[]);
+static int validarTexto(char cadenaDeCaracteres[]);
+static int validar_Correo(char cadenaDeCaracteres[]);
+static int validarDireccion(char cadenaDeCaracteres[]);
+
+
+//Entradas de tipo string
+int pedir_texto(char cadenaDeCaracteres[], char* mensaje, char mensajeError, int reintentos)
+{
+
+	int deteccion;
+	int i;
+	char bufferChar[64];
+	deteccion=-1;
+
+	if(cadenaDeCaracteres!=NULL && mensaje!=NULL && mensajeError!=NULL && reintentos!=0)
+	{
+		for(i=0; i<reintentos; i++)
+		{
+			printf("%s", mensaje);
+			//aca directamente usamos la funcion getFloat para cargar un numero float
+			if(myGets(bufferChar,sizeof(bufferChar))==0 && validarTexto(bufferChar))//ahi obtendremos la validacion mediante la funcion
+			{
+				deteccion=0;
+				strcpy(cadenaDeCaracteres);
+						break;
+			}
+			else
+			{
+				printf("%s", mensajeError);//mensaje de error por si la cosa se pone complicada xd
+			}
+			}
+		}
+
+		return deteccion;
+	}
 
 
 
 
+
+int pedirCorreo(char cadenaDeCaracteres[], char* mensaje, char mensajeError, int reintentos)
+{
+	int deteccion;
+	int i;
+	char bufferChar[69];
+	deteccion=-1;
+
+	if(cadenaDeCaracteres!=NULL && mensaje!=NULL && mensajeError!=NULL && reintentos!=0)
+	{
+		for(i=0; i<reintentos; i++)
+		{
+			printf("%s", mensaje);
+			//aca directamente usamos la funcion getFloat para cargar un numero float
+			if(myGets(bufferChar,sizeof(bufferChar))==0 && validar_Correo(bufferChar))//ahi obtendremos la validacion mediante la funcion
+			{
+				deteccion=0;
+				strcpy(cadenaDeCaracteres);
+						break;
+			}
+			else
+			{
+				printf("%s", mensajeError);//mensaje de error por si la cosa se pone complicada xd
+			}
+			}
+		}
+
+		return deteccion;
+}
+
+
+int pedirDireccion(char cadenaDeCaracteres[], char* mensaje, char mensajeError, int reintentos)
+{
+
+	int deteccion;
+	int i;
+	char bufferChar[64];
+	deteccion=-1;
+
+	if(cadenaDeCaracteres!=NULL && mensaje!=NULL && mensajeError!=NULL && reintentos!=0)
+	{
+		for(i=0; i<reintentos; i++)
+		{
+			printf("%s", mensaje);
+			//aca directamente usamos la funcion getFloat para cargar un numero float
+			if(myGets(bufferChar,sizeof(bufferChar))==0 && validarDireccion(bufferChar))//ahi obtendremos la validacion mediante la funcion
+			{
+				deteccion=0;
+				strcpy(cadenaDeCaracteres);
+						break;
+			}
+			else
+			{
+				printf("%s", mensajeError);//mensaje de error por si la cosa se pone complicada xd
+			}
+			}
+		}
+
+		return deteccion;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Entradas de tipo number
 
 int PedirTipoInt(int* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos)
 {
@@ -23,16 +140,18 @@ int PedirTipoInt(int* pResultado, char* mensaje, char* mensajeError, int minimo,
 		if(pResultado!=NULL && mensaje!= NULL && mensajeError!=NULL && minimo<=maximo && reintentos>=0)
 		{
 			printf("%s", mensaje);
-			scanf("%d",&bufferInt);
-			if(bufferInt>=minimo && bufferInt<=maximo)
-			{
-				*pResultado=bufferInt;
-				deteccion=0;
-				break;
-			} else
-			{
-				printf("%s", mensajeError);
-			}
+				if(getInt(bufferInt)==0)
+				{
+					if(bufferInt>=minimo && bufferInt<=maximo)
+					{
+						*pResultado=bufferInt;
+						deteccion=0;
+						break;
+					} else
+					{
+						printf("%s", mensajeError);
+					}
+				}
 
 		}
 
@@ -100,6 +219,8 @@ int myGets(char cadena[], int len)
 
 
 
+//Las funciones static
+
 static int validarFloat(char cadenaFloat[])//osea aunque sea guardado, al final, en una variable float
 {//de forma discreta fuera de los ojos del usuario. Se esta pidiendo una cadena
 	//Y aca es donde se valida
@@ -119,7 +240,7 @@ static int validarFloat(char cadenaFloat[])//osea aunque sea guardado, al final,
 				{
 						deteccion=0;//osea que esta saliendo bien.
 				}
-				else if(flagPunto=0 && cadenaFloat[i]== 46)
+				else if(flagPunto==0 && cadenaFloat[i]== 46)
 				{
 					flagPunto=-1;
 				} else {
@@ -193,3 +314,95 @@ static int validarEntero(char charDeEnteros[])
 	}
 	return deteccion;
 }
+
+
+
+
+
+//funciones static para el pedir_texto
+
+static int validarTexto(char cadenaDeCaracteres[])
+{
+	int deteccion;
+	deteccion=-1;
+	if(cadenaDeCaracteres!=NULL && strlen(cadenaDeCaracteres)>0)
+	{
+		for(int i=0; cadenaDeCaracteres[i]!='\0'; i++)
+		{
+
+				if((cadenaDeCaracteres[i]>='a' && cadenaDeCaracteres[i]<='z')||(cadenaDeCaracteres[i]>='A' && cadenaDeCaracteres[i]<='Z') || cadenaDeCaracteres[i]==164)//donde 48=0 y 57=9 en ascii
+				{
+						deteccion=0;//osea que esta saliendo bien.
+				}
+				else
+				{
+					deteccion=-1;
+					break;
+				}
+
+		}
+	}
+	return deteccion;
+}
+
+
+
+static int validar_Correo(char cadenaDeCaracteres[])
+{
+	int deteccion;
+	int flagArroba;
+	flagArroba=0;
+	deteccion=-1;
+	if(cadenaDeCaracteres!=NULL && strlen(cadenaDeCaracteres)>0)
+	{
+		for(int i=0; cadenaDeCaracteres[i]!='\0'; i++)
+		{
+				if((flagArroba==0 && cadenaDeCaracteres[i]==64)||(cadenaDeCaracteres[i]>='a' && cadenaDeCaracteres[i]<='z')||(cadenaDeCaracteres[i]>='A' && cadenaDeCaracteres[i]<='Z') || cadenaDeCaracteres[i]==96 )//donde 48=0 y 57=9 en ascii
+				{
+					flagArroba=-1;
+					deteccion=0;
+				}
+				else
+				{
+					deteccion=-1;
+					break;
+				}
+
+		}
+	}
+	return deteccion;
+}
+
+
+
+
+
+
+static int validarDireccion(char cadenaDeCaracteres[])
+{
+	int deteccion;
+	deteccion=-1;
+
+
+	if(cadenaDeCaracteres!=NULL && strlen(cadenaDeCaracteres)>0)
+	{
+		for(int i=0; cadenaDeCaracteres[i]!='\0'; i++)
+		{
+				if((cadenaDeCaracteres[i]>='0' && cadenaDeCaracteres[i]<='9')
+						||(cadenaDeCaracteres[i]>='a' && cadenaDeCaracteres[i]<='z')
+						||(cadenaDeCaracteres[i]>='A' && cadenaDeCaracteres[i]<='Z')
+						|| cadenaDeCaracteres[i]==96 )//donde 48=0 y 57=9 en ascii
+				{
+					deteccion=0;
+				}
+				else
+				{
+					deteccion=-1;
+					break;
+				}
+
+		}
+	}
+	return deteccion;
+}
+

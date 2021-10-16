@@ -44,23 +44,20 @@ int addEmployee(Employee* list, int len, int id, char name[],char lastName[],flo
 {
 	int check;
 	int index;
-
+	check=-1;
 	if(list!=NULL && len>0 && id>0 && name!=NULL && lastName!=NULL && salary!=NULL && sector>0)
 	{
-		if((index=findEmpty(&list, len))==0)
+		index=findEmpty(&list, len);
+		if(index>0)
 		{
 			list->id[index]=id;
-			list->name[index]=name;
-			list->lastName[index]=lastName;
+			strncpy(list->lastName[index], lastName, 51);
+			strncpy(list->lastName[index], lastName, 51);
 			list->salary[index]=salary;
 			list->sector[index]=sector;
+			check=0;
 		}
 	}
-
-
-
-
-
 
 	return check;
 }
@@ -72,15 +69,15 @@ int addEmployee(Employee* list, int len, int id, char name[],char lastName[],flo
 
 
 
-/*int addEmployees(Employee list[], int len)
+int addEmployeesAux(Employee* list)
 {
 	int deteccion;
 	Employee listaAuxiliar;
-		if(list!=NULL && len>0)
+		if(list!=NULL)
 		{
-			if(myGets(listaAuxiliar.name, len)!=-1)
+			if(pedir_texto(&listaAuxiliar.name, "Ingrese el nombre del empleado que va ingresar", "ERROR. Ingrese un nombre", 3)==0)
 			{
-				if(myGets(listaAuxiliar.lastName, len)!=-1)
+				if(pedir_texto(&listaAuxiliar.lastName, "Ingrese el apellido del empleado", "ERROR. Que esta haciendo?", 3)==0)
 				{
 					if(PedirTipoFloat(listaAuxiliar.salary, "Ingrese el salario del empleado", "ERROR. Use numero reales, porfavor", 0.0, 999999, 2)==0)
 					{
@@ -88,8 +85,8 @@ int addEmployee(Employee* list, int len, int id, char name[],char lastName[],flo
 						{
 							if((listaAuxiliar.id=crearId())>0)
 							{
-								list->lastName=listaAuxiliar.lastName;
-								list->name=listaAuxiliar.name;
+								strncpy(list->lastName, listaAuxiliar.lastName, 51);
+								strncpy(list->name, listaAuxiliar.name, 51);
 								list->salary=listaAuxiliar.salary;
 								list->sector=listaAuxiliar.sector;
 								list->id=listaAuxiliar.id;
@@ -101,9 +98,16 @@ int addEmployee(Employee* list, int len, int id, char name[],char lastName[],flo
 		}
 
 	return deteccion;
-}*/
+}
 
 
+
+
+/*
+ * ebref Esta funcion cumple con el trabajo de imprimir
+ * parametros Recibe un array de la entidad Employee y el largo del vector.
+ * return Devuelve un 0 si salio bien y un -1 si salio mal.
+ */
 
 int printEmployees(Employee* list, int length)
 
@@ -161,6 +165,11 @@ int modifyEmployeebyId(Employee* list, int len, int id, int option)
 {
 	int check;
 	int indexEmployee;
+	char nombreAux[len];
+	char apellidoAux[len];
+	float salarioAux;
+	int sectorAux;
+
 	check=-1;
 
 
@@ -170,6 +179,48 @@ int modifyEmployeebyId(Employee* list, int len, int id, int option)
 			switch(option)
 			{
 			  case 1:
+				 if(pedir_texto(&nombreAux, "ingrese el nuevo nombre el empleado.", "ERROR. VOLVIENDO AL MENU", 1)==0)
+				 {
+					 strncpy(list[indexEmployee]->name, nombreAux, len);
+				 }
+				 else
+				 {
+					 check=-1;
+				 }
+				 break;
+			  case 2:
+				 if(pedir_texto(&apellidoAux, "ingrese el nuevo apellido del empleado.", "ERROR. VOLVIENDO AL MENU", 1)==0)
+				 {
+					 strncpy(list[indexEmployee]->lastName, apellidoAux, len);
+				 }
+				 else
+				 {
+				 	 check=-1;
+				 }
+				 break;
+			  case 3:
+				  if(pedirTipoFloat(&salarioAux, "Ingrese le nuevo salario del empleado", "ERROR. VOLVIENDO AL MENU...", -999999999999.999999, 9999999.9999999, 1)==0)
+				  {
+					  list[indexEmployee]->salary=salarioAux;
+				  }
+				  else
+				  {
+					  check=-1;
+				  }
+				  break;
+			  case 4:
+				  if(pedirTipoInt(&sectorAux, "Ingrese el sector en cual sera movido el empleado", "ERROR", 0, 6, 1)==0)
+				  {
+					  list[indexEmployee]->sector=sectorAux;
+				  }
+				  else
+				  {
+					  check=-1;
+				  }
+				  break;
+			  case 5:
+				  check=1;
+				  break;
 
 			}
 
@@ -213,7 +264,7 @@ int removeEmployee(Employee* list, int len, int id)
 		{
 			for(int i=0; i<len; i++)
 			{
-				if(list[i].id==id)
+				if(list[i].id==id && list[i].isEmpty==1)
 				{
 					list[i].isEmpty=0;
 					check=0;
@@ -248,7 +299,7 @@ void seeMenu(){
 
 
 
-
+//aca iran las funciones static
 
 
 

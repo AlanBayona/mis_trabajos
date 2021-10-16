@@ -26,6 +26,7 @@ int initEmployees(Employee list[], int len);
 //Funciones de la parte ALTA
 void printEmployees(Employee list[], int len);
 int findEmpty(Employee list[], int len);
+int addEmployeesAux(Employee* list);
 int addEmployee(Employee* list, int len, int id, char name[],char 	lastName[],float salary,int sector);
 int crearId(void);
 
