@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Salon.h"
+#include "Inputs.h"
 
 #define CANT_SALONES 2
 
@@ -23,35 +24,47 @@ int main(void) {
 
 	do
 	{
-
-		if(pedirTipoInt(&opcion, "\tMenu\n1-ALTA DE SALON", mensajeError, minimo, maximo, reintentos))
+		if(pedirTipoInt(&opcion, "\tMenu\n1-ALTA DE SALON\n2-ELIMINAR SALON\n", "ERROR", 0, 10, 999)==0)
 		{
 			switch(opcion)
+			{
 
 			case 1:
+				if(agregarSalon(listaSalones, CANT_SALONES)==0)
+				{
+					puts("Salio bien");
+				}
+				else
+				{
+					puts("ERROR.\n Volviendo al menu...");
+				}
+					break;
 
 			case 2:
+
 				if(imprimirSalon(listaSalones, CANT_SALONES)==0)
 				{
-
+					if(removerSalon(listaSalones, CANT_SALONES)==0)
+					{
+						puts("La baja se realizo con exito.");
+					}
+					else
+					{
+						puts("ERROR. Su id de baja no existe");
+					}
 				}
 				else
 				{
 					puts("No se ingreso ningun SALON.\nVolviendo al menu...");
 				}
-			case 3:
-			case 4:
-			case 5:
-			case 6:
-			case 7:
-			case 8:
-			case 9:
+				break;
+			}
 		}
 
 
 
 
-	}while(opcion==5);
+	}while(opcion==9);
 
 
 

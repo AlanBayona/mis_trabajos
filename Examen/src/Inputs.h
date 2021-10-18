@@ -14,9 +14,9 @@
 int myGets(char cadena[], int len);
 int pedirTipoInt(int* pResultado, char* mensaje, char* mensajeError, int  minimo, int maximo, int reintentos);
 int pedirTipoFloat(float* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos);
-int pedir_texto(char cadenaDeCaracteres[], char* mensaje, int reintentos);
-int pedirDireccion(char cadenaDeCaracteres[], char* mensaje, char mensajeError, int reintentos);
-int pedirCorreo(char cadenaDeCaracteres[], char* mensaje, char mensajeError, int reintentos);
+int pedir_texto(char cadenaDeCaracteres[], char* mensaje, char* mensajeError, int reintentos);
+int pedirDireccion(char cadenaDeCaracteres[], char* mensaje, char* mensajeError, int reintentos);
+int pedirCorreo(char cadenaDeCaracteres[], char* mensaje, char* mensajeError, int reintentos);
 
 
 

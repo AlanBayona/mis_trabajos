@@ -20,7 +20,8 @@ typedef struct{
 
 
 int buscarSalonVacio(eSalon list[], int len);
-int buscarPorId(eSalon* list, int len,int id);
+int buscarPorId(eSalon list[], int len,int id);
+int imprimirSalon(eSalon list[], int len);
 
 //funciones de Alta
 int initSalon(eSalon list[], int len);
@@ -30,6 +31,6 @@ int agregarSalon(eSalon list[], int len);
 //funciones de la modificacion
 
 //funciones de la BAJA
-
+int removerSalon(eSalon list[], int len);
 
 #endif /* SALON_H_ */

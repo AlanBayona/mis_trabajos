@@ -7,9 +7,6 @@
 
 //funciones de impresion
 
-
-
-
 //funciones ALTA
 
 int agregarSalon(eSalon list[], int len)
@@ -27,16 +24,20 @@ int agregarSalon(eSalon list[], int len)
 			{
 				if(pedirDireccion(&salonAux.direccion, "Ingrese direccion del salon:\n", "ERROR", 2)==0)
 				{
-					if(pedirTipoInt(&salonAux.tipo, "\tIngrese tipo:\n1-Shopping\n2-Local\n", "Error", 0, 3, 2)==0)
+					if(pedirTipoInt(&salonAux->tipo, "\tIngrese tipo:\n1-Shopping\n2-Local\n", "Error", 0, 3, 2)==0)
 					{
-						if((salonAux.id=crearId())>0)
+						salonAux.id=crearId();
+						if(salonAux.id>0)
 						{
-							strncpy(list[index]->nombre, salonAux.nombre, 51);
-							strncpy(list[index]->direccion, salonAux.direccion, 51);
-							list[index]->tipo=salonAux.tipo;
-							list[index]->id=salonAux.id;
-							list[index]->isEmpty=1;
+							strncpy(list[index].nombre, salonAux.nombre, 51);
+							strncpy(list[index].direccion, salonAux.direccion, 51);
+							list[index].tipo=salonAux.tipo;
+							list[index].id=salonAux.id;
+							list[index].isEmpty=1;
+
+
 							deteccion=0;
+
 						}
 					}
 				}
@@ -48,8 +49,6 @@ int agregarSalon(eSalon list[], int len)
 	return deteccion;
 
 }
-
-
 
 
 
@@ -75,7 +74,7 @@ int initSalon(eSalon list[], int len)
 //Funciones del ALTA
 
 
-int addEmployee(Employee* list, int len, int id, char name[],char lastName[],float salary,int sector)
+/*int addEmployee(Employee* list, int len, int id, char name[],char lastName[],float salary,int sector)
 {
 	int check;
 	int index;
@@ -95,7 +94,7 @@ int addEmployee(Employee* list, int len, int id, char name[],char lastName[],flo
 	}
 
 	return check;
-}
+} */
 
 
 
@@ -158,7 +157,7 @@ int buscarSalonVacio(eSalon list[], int len)
 
 //funciones Modificacion
 
-int modifyEmployeebyId(Employee* list, int len, int id, int option)
+/*int modifyEmployeebyId(Employee* list, int len, int id, int option)
 {
 	int check;
 	int indexEmployee;
@@ -226,10 +225,10 @@ int modifyEmployeebyId(Employee* list, int len, int id, int option)
 
 
 	return check;
-}
+}*/
 
 
-int buscarPorId(eSalon* list, int len,int id)
+int buscarPorId(eSalon list[], int len,int id)
 {
   int index;
   index=-1;
@@ -253,19 +252,23 @@ int buscarPorId(eSalon* list, int len,int id)
 //funcion de BAJA
 
 
-int removerSalon(eSalon list[], int len, int id)
+int removerSalon(eSalon list[], int len)
 {
 	int deteccion;
+	int idBuscado;
 	deteccion=-1;
-		if(list!=NULL && len>0 && id!=NULL)
+		if(list!=NULL && len>0)
 		{
-			for(int i=0; i<len; i++)
+			if(pedirTipoInt(&idBuscado, "Ingrese el id que desee remover", "Invalido", 0, 999, 1)==0)
 			{
-				if(list[i].id==id && list[i].isEmpty==1)
+				for(int i=0; i<len; i++)
 				{
-					list[i].isEmpty=0;
-					deteccion=0;
-					break;
+					if(list[i].id==idBuscado && list[i].isEmpty==1)
+					{
+						list[i].isEmpty=0;
+						deteccion=0;
+						break;
+					}
 				}
 			}
 		}
@@ -280,19 +283,6 @@ int removerSalon(eSalon list[], int len, int id)
 
 
 
-
-void seeMenu(){
-
-	puts("\n ======================== BIENVENIDO =========================");
-	puts("*                                                              *");
-	printf("*---------------\t\tMENU\t\t---------------*\n");
-	puts("* OPCIONES:                                                    *");
-	puts("*  1. ALTA.                                                    *");
-	puts("*\t2. MODIFICAR.                                           *");//un \t equivale a 7 asteriscos(*)
-	puts("*\t\t3. BAJA.                                       *");
-	puts("*\t\t\t4. INFORMAR.                           *");
-	puts("************************ ..:5) Salir:.. ************************");
-}
 
 
 

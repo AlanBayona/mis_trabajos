@@ -13,7 +13,7 @@ static int validarDireccion(char cadenaDeCaracteres[]);
 
 
 //Entradas de tipo string
-int pedir_texto(char cadenaDeCaracteres[], char* mensaje, char mensajeError, int reintentos)
+int pedir_texto(char cadenaDeCaracteres[], char* mensaje, char* mensajeError, int reintentos)
 {
 
 	int deteccion;
@@ -30,7 +30,7 @@ int pedir_texto(char cadenaDeCaracteres[], char* mensaje, char mensajeError, int
 			if(myGets(bufferChar,sizeof(bufferChar))==0 && validarTexto(bufferChar))//ahi obtendremos la validacion mediante la funcion
 			{
 				deteccion=0;
-				strcpy(cadenaDeCaracteres);
+				strcpy(cadenaDeCaracteres, bufferChar);
 						break;
 			}
 			else
@@ -47,14 +47,14 @@ int pedir_texto(char cadenaDeCaracteres[], char* mensaje, char mensajeError, int
 
 
 
-int pedirCorreo(char cadenaDeCaracteres[], char* mensaje, char mensajeError, int reintentos)
+int pedirCorreo(char cadenaDeCaracteres[], char* mensaje, char* mensajeError, int reintentos)
 {
 	int deteccion;
 	int i;
 	char bufferChar[69];
 	deteccion=-1;
 
-	if(cadenaDeCaracteres!=NULL && mensaje!=NULL && mensajeError!=NULL && reintentos!=0)
+	if(cadenaDeCaracteres!=NULL && mensaje!=NULL && mensajeError!=NULL && reintentos>0)
 	{
 		for(i=0; i<reintentos; i++)
 		{
@@ -63,7 +63,7 @@ int pedirCorreo(char cadenaDeCaracteres[], char* mensaje, char mensajeError, int
 			if(myGets(bufferChar,sizeof(bufferChar))==0 && validar_Correo(bufferChar))//ahi obtendremos la validacion mediante la funcion
 			{
 				deteccion=0;
-				strcpy(cadenaDeCaracteres);
+				strcpy(cadenaDeCaracteres, bufferChar);
 						break;
 			}
 			else
@@ -77,7 +77,7 @@ int pedirCorreo(char cadenaDeCaracteres[], char* mensaje, char mensajeError, int
 }
 
 
-int pedirDireccion(char cadenaDeCaracteres[], char* mensaje, char mensajeError, int reintentos)
+int pedirDireccion(char cadenaDeCaracteres[], char* mensaje, char* mensajeError, int reintentos)
 {
 
 	int deteccion;
@@ -85,7 +85,7 @@ int pedirDireccion(char cadenaDeCaracteres[], char* mensaje, char mensajeError, 
 	char bufferChar[64];
 	deteccion=-1;
 
-	if(cadenaDeCaracteres!=NULL && mensaje!=NULL && mensajeError!=NULL && reintentos!=0)
+	if(cadenaDeCaracteres!=NULL && mensaje!=NULL && mensajeError!=NULL && reintentos>0)
 	{
 		for(i=0; i<reintentos; i++)
 		{
@@ -94,7 +94,7 @@ int pedirDireccion(char cadenaDeCaracteres[], char* mensaje, char mensajeError, 
 			if(myGets(bufferChar,sizeof(bufferChar))==0 && validarDireccion(bufferChar))//ahi obtendremos la validacion mediante la funcion
 			{
 				deteccion=0;
-				strcpy(cadenaDeCaracteres);
+				strcpy(cadenaDeCaracteres, bufferChar);
 						break;
 			}
 			else
