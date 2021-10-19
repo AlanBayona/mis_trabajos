@@ -14,19 +14,25 @@
 #include <string.h>
 #include "Salon.h"
 #include "Inputs.h"
+#include "Arcade.h"
 
 #define CANT_SALONES 2
+#define CANT_ARCADES 4
 
 
 int main(void) {
 	setbuf(stdout, NULL);
 
 	eSalon listaSalones[CANT_SALONES];
+	eArcade listaArcades[CANT_ARCADES];
 	int opcion;
-	int flag;
-	flag=-1;
+	int flagSalon;
+	int flagArcade;
+	flagArcade=-1;
+	flagSalon=-1;
 
 	initSalon(listaSalones, CANT_SALONES);
+	initArcade(listaArcades, CANT_ARCADES);
 
 	do
 	{
@@ -38,28 +44,24 @@ int main(void) {
 			case 1:
 				if(agregarSalon(listaSalones, CANT_SALONES)==0)
 				{
-
 					puts("\nSalio bien");//recordar borrar
-					flag=1;
+					flagSalon=1;
 				}
 				else
 				{
 					puts("\nERROR.\n Volviendo al menu...");
 				}
-
-
 					break;
 
 			case 2:
-
-					if(imprimirArraySalones(listaSalones, CANT_SALONES)==0 && flag==1)
+					if(imprimirArraySalones(listaSalones, CANT_SALONES)==0 && flagSalon==1)
 					{
 						if(removerSalon(listaSalones, CANT_SALONES)==0)
 						{
 							puts("\nLa baja se realizo con exito.\n");
 							if(verificarSalones(listaSalones, CANT_SALONES)<0)
 							{
-								flag=0;
+								flagSalon=0;
 							}
 						}
 						else
@@ -74,21 +76,66 @@ int main(void) {
 				break;
 			case 3:
 
-				if(imprimirArraySalones(listaSalones, CANT_SALONES)==0)
+				if(imprimirArraySalones(listaSalones, CANT_SALONES)==0 && flagArcade==1)
+				{
+					puts("case 3 salio bien");
+				}
+				else
+				{
+					puts("Salio mal la impresion");
+				}
+				break;
+			case 4:
+				if(agregarArcade(listaArcades, listaSalones, CANT_SALONES, CANT_ARCADES)==0)
+				{
+					flagArcade=0;
+					puts("\nAlta concretada.\nVolviendo al Menu...");
+				}
+				else
+				{
+					puts("\nSalio mal. Volviendo al Menu...");
+				}
+				break;
+			case 5:
+				if(flagArcade==0)
 				{
 
+				}else
+				{
+					puts("Primero debe ingresar algun Arcade para der de baja, maquina");
 				}
+				break;
+			case 6:
+				if(flagArcade==0 && imprimirArrayArcade(listaArcades, CANT_ARCADES)==0)
+				{
+					if(removerArcade(listaArcades, CANT_ARCADES)==0)
+					{
+						puts("Se elimino con exito.\n Volviendo al Menu...");
+					}
+					else
+					{
+						puts("Eliminacion no concretado.\n Volviendo al menu....");
+					}
+		        }
+				else
+				{
+					puts("Primero debe ingresar algun Arcade para der de baja, maquina");
+				}
+				break;
 
-
+			case 7:
+				if(flagArcade==0 && imprimirSoloArrayArcades(listaArcades, CANT_ARCADES)==0);
+				{
+					puts("\nVolviendo al Menu....");
+				}
+				else
+				{
+					puts("ERROR");
+				}
+				break;
 
 			}
 		}
-		else{
-			puts("Revisa");
-		}
-
-
-
 
 	}while(opcion!=9);
 
