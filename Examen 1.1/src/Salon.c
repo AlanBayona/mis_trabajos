@@ -8,6 +8,10 @@
 #define LIBRE 0
 #define OCUPADO 1
 
+#define SHOPPING 1
+
+#define LOCAL 2
+
 
 
 
@@ -124,14 +128,22 @@ int imprimirArraySalones(eSalon list[], int len)
 
 	if(list!=NULL && len>0)
 	{
-		//printf("\tLista del ID:\n");
+		printf("\n\t\tLista de los Salones:\n");
 		for(int i=0; i< len; i++)
 		{
 			if(list[i].isEmpty==1)
 			{
-				printf("* ID: %d\n", list[i].id);
-				printf("\tName: %s\n",list[i].nombre);
+
+				printf("\tNombre: %s\n",list[i].nombre);
 				printf("\tDireccion: %s\n",list[i].direccion);
+				if(list[i].tipo==SHOPPING)
+				{
+					printf("\tTipo: Shopping\n");
+				}
+				else
+				{
+					puts("\tTipo: Local\n");
+				}
 			}
 		}
 		deteccion=0;
@@ -160,6 +172,31 @@ int buscarSalonVacio(eSalon list[], int len)
 
 	return index;
 }
+
+
+
+int verificarSalones(eSalon list[], int len)
+{
+	int index;
+	index=-1;
+	if(list!=NULL && len>0)
+	{
+		for(int i=0; i<len; i++)
+		{
+			if(list[i].isEmpty==OCUPADO)//es 0 si esta libre
+			{
+				index=i;
+				break;
+			}
+		}
+	}
+
+
+
+	return index;
+}
+
+
 
 
 

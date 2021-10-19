@@ -137,7 +137,7 @@ int pedirTipoInt(int* pResultado, char* mensaje, char* mensajeError, int minimo,
 
 	 for(i=0; i<reintentos; i++)
 	 {
-		if(pResultado!=NULL && mensaje!= NULL && mensajeError!=NULL && minimo<=maximo && reintentos>=0)
+		if(pResultado!=NULL && mensaje!= NULL && mensajeError!=NULL && minimo<=maximo && reintentos>0)
 		{
 			printf("%s", mensaje);
 				if(getInt(&bufferInt)==0)
@@ -146,6 +146,7 @@ int pedirTipoInt(int* pResultado, char* mensaje, char* mensajeError, int minimo,
 					{
 						*pResultado=bufferInt;
 						deteccion=0;
+						puts("Entro");
 						break;
 					} else
 					{
@@ -233,9 +234,9 @@ static int validarFloat(char cadenaFloat[])//osea aunque sea guardado, al final,
 		for(int i=0; cadenaFloat[i]!='\0'; i++)//mientras no hay un \0 este bucle se repetira
 		{
 			if(i==0 && (cadenaFloat[i]=='-' || cadenaFloat[i]=='+')) //con esto puedo saber si hay un mas o menos adelante
-			{//aunque falta pulir mas cosas
-
-				//tengo la intencion de verificar si es un float en caracteres
+			{
+				continue;
+			}
 				if(cadenaFloat[i]>=48 && cadenaFloat[i]<=57)//donde 48=0 y 57=9 en ascii
 				{
 						deteccion=0;//osea que esta saliendo bien.
@@ -247,7 +248,7 @@ static int validarFloat(char cadenaFloat[])//osea aunque sea guardado, al final,
 					deteccion=-1;
 					break;
 				}
-			}
+
 		}
 	}
 
@@ -263,6 +264,7 @@ static int getInt(int* pResultado)//esta funcion en complemento de getFloat(debe
 	{
 		if(myGets(buffer,sizeof(buffer))==0 && validarEntero(buffer)==0)//luego con validarFloat, valido si la funcion ingresado por myGet sea numero, en este caso un numero float.
 		{
+			puts("dentro de getint");
 			*pResultado=atoi(buffer);
 			deteccion=0;
 		}
@@ -297,19 +299,22 @@ static int validarEntero(char charDeEnteros[])
 		{
 			if(i==0 && (charDeEnteros[i]=='-' || charDeEnteros[i]=='+'))
 			{
-
-
-				if(charDeEnteros[i]>=48 && charDeEnteros[i]<=57)//donde 48=0 y 57=9 en ascii
-				{
-						deteccion=0;//osea que esta saliendo bien.
-
-				}
-				else
-				{
-					deteccion=-1;
-					break;
-				}
+				continue;
 			}
+
+			if(charDeEnteros[i]>=48 && charDeEnteros[i]<=57)//donde 48=0 y 57=9 en ascii
+			{
+				deteccion=0;//osea que esta saliendo bien.
+
+			}
+			else
+			{
+				puts("ERROR EN LA LINEA 312//funcion: validaENtero");//borrar
+				deteccion=-1;
+				break;
+			}
+			puts("Me equivoque");
+
 		}
 	}
 	return deteccion;
@@ -407,4 +412,3 @@ static int validarDireccion(char cadenaDeCaracteres[])
 	}
 	return deteccion;
 }
-
