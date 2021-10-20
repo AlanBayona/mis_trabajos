@@ -10,10 +10,39 @@
 #define LIBRE 0
 #define OCUPADO 1
 
-static void mostrarJuegos(eJuego list[], int len);
 //static int validarId(eSalon list[], int len, int id);
 static void mostrarRelacionPorId(eSalon list[], int len, int idABuscar);
+static int initJuegos(eJuego juegos[], int len);
+
 //funcion de inicio
+
+
+
+
+
+
+static int initJuegos(eJuego juegos[], int len)
+{
+	int deteccion;
+	deteccion=-1;
+	if(juegos!=NULL && len>0)
+	{
+		for(int i=0; i<len; i++)
+		{
+
+			juegos[i].isEmpty=0;//significa que esta vacio
+		}
+		deteccion=0;
+	}
+
+	return deteccion;
+}
+
+
+
+
+
+
 
 
 int initArcade(eArcade listado[], int len)
@@ -166,7 +195,7 @@ int agregarArcade(eArcade list[], int lenArcade)
 		index=buscarArcadeVacio(list, lenArcade);
 		if(index >= 0)
 		{
-			if(pedir_texto(&arcadeAux.nacionalidad, "Ingrese la nacionadad del juego:\n", "ERROR. Intente de nuevo\n", 2)==0)
+			if(pedir_texto(&arcadeAux.nacionalidad, "\nIngrese la nacionadad del juego:\n", "ERROR. Intente de nuevo\n", 2)==0)
 			{
 				if(pedirDireccion(&arcadeAux.nombreDelJuego, "Ingrese el nombre del juego:\n", "ERROR tipo A. fallo en el nombre del juego\n", 2)==0)
 				{
@@ -299,15 +328,15 @@ int removerArcade(eArcade list[], int lenArcade)
 
 
 
-static void mostrarJuegos(eJuego list[], int len)
+void mostrarJuegos(eJuego list[], int len)
 {
 	int i;
 
+	printf("\tJUEGOS\n");
 	for(i=0; i<len; i++)
 	{
 		if(list[i].isEmpty==1)
 		{
-			printf("\tJUEGOS\n");
 			printf("* %s *\n", list[i].listaDeJuegos);
 		}
 	}
@@ -319,8 +348,9 @@ int arca_mostrarJuegos(eArcade listArcades[], int len)
 	int flag;
 	flag=0;
 	eJuego listaAuxJuegos[25];
+	deteccion=-1;
 
-	if(listArcades != NULL && len > 0)
+	if(listArcades != NULL && len > 0 && initJuegos(listaAuxJuegos, 25)==0)
 	{
 		for(int i=0; i<len; i++)
 
@@ -329,8 +359,8 @@ int arca_mostrarJuegos(eArcade listArcades[], int len)
 			{
 				if(listarJuegos(listaAuxJuegos, 25, listArcades[i].nombreDelJuego)==0)
 				{
-				flag=0;
-				continue;
+					flag=0;
+					continue;
 				}
 			}
 
@@ -339,12 +369,13 @@ int arca_mostrarJuegos(eArcade listArcades[], int len)
 		if(flag==0)
 		{
 			mostrarJuegos(listaAuxJuegos, 25);
+			deteccion=0;
 		}
 
 	}
 
-	return deteccion;
 
+	return deteccion;
 }
 
 
@@ -359,20 +390,41 @@ int listarJuegos(eJuego list[], int len, char* juego)
 	{
 		if(strcmp(list[i].listaDeJuegos, juego)!=0 && list[i].isEmpty==LIBRE)
 		{
-			strncpy(list[i].listaDeJuegos, juego, 51);
-			list[i].isEmpty=1;
-			deteccion=0;
-			break;
+			if(validarJuego(list, len, juego)==0)
+			{
+				strncpy(list[i].listaDeJuegos, juego, 51);
+				list[i].isEmpty=1;
+				deteccion=0;
+				break;
+			}
 		}
-		else
-		{
-			break;
-		}
+
 	}
 
 	return deteccion;
 }
 
+
+
+int validarJuego(eJuego listaJuegos[], int len, char* juego)
+{
+	  int deteccion;
+	  deteccion=0;
+
+			  if(listaJuegos!=NULL && len>0 && juego!=NULL)
+			  {
+				  for(int i=0; i<len; i++)
+				  {
+					  if(strcmp(listaJuegos[i].listaDeJuegos, juego)==0)
+					  {
+						  deteccion=-1;
+						  break;
+					  }
+				  }
+			  }
+			  	 return deteccion;
+
+}
 
 
 
@@ -386,30 +438,37 @@ int modificarArcade(eArcade arcades[], int len)
 	int idABuscar;
 	int opcion;
 	int cant_jugadoresAux;
+	char nombreNuevoDelJuego[51];
 	int index;
+	deteccion=-1;
 
-	if(arcades!=NULL && len>0)
-	{
-		if(imprimirSoloArrayArcades(arcades, len)==0 && pedirTipoInt(&idABuscar, "\nIngrese el Id del Arcade que desee modificar\n", "\nError\n", 1, 2, 2)==0)
+		if(arcades!=NULL && len>0)
 		{
-			index= arcade_buscarPorId(arcades, len, idABuscar);
-			if(index>=0 && pedirTipoInt(&opcion, "\tMODIFICACION\n*1-Cantidad de jugadores\n*2-juego\n", "Opcion invalido", 1, 2, 2)==0)
+			if(imprimirSoloArrayArcades(arcades, len)==0 && pedirTipoInt(&idABuscar, "\nIngrese el Id del Arcade que desee modificar\n", "\nError\n", 1, 2, 2)==0)
 			{
-				switch(opcion)
+				index= arcade_buscarPorId(arcades, len, idABuscar);
+				if(index>=0 && pedirTipoInt(&opcion, "\tMODIFICACION\n*1-Cantidad de jugadores\n*2-juego\n", "Opcion invalido", 1, 2, 2)==0)
 				{
-					case 1:
-						if(pedirTipoInt(&cant_jugadoresAux, "\nIngrese la nueva cantidad de jugadores\n ", "ERROR", 1, 2, ))
-						{
+					switch(opcion)
+					{
+						case 1:
+							if(pedirTipoInt(&cant_jugadoresAux, "\nIngrese la nueva cantidad de jugadores\n ", "ERROR", 1, 2, 2)==0)
+							{
+								arcades[index].cant_jugadores=cant_jugadoresAux;
+								deteccion=0;
+							}
+						break;
 
-						}
+						case 2:
+							if(arca_mostrarJuegos(arcades, len)==0 && pedirDireccion(&nombreNuevoDelJuego, "\nIngresa el nuevo nombre del juego\n", "ERROR", 3)==0)
+							{
+								strncpy(arcades[index].nombreDelJuego, nombreNuevoDelJuego, 51);
+								deteccion=0;
+							}
+					}
 				}
 			}
 		}
-	}
-
-
-
-
 	return deteccion;
 }
 
@@ -425,7 +484,7 @@ int arcade_buscarPorId(eArcade arcades[], int len,int id)
 		  {
 			  for(int i=0; i<len; i++)
 			  {
-				  if(arcades[i].id==id)
+				  if(arcades[i].id==id && arcades[i].isEmpty==OCUPADO)
 				  {
 					  index=i;
 					  break;

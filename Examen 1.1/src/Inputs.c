@@ -305,7 +305,7 @@ static int validarEntero(char charDeEnteros[])
 				deteccion=-1;
 				break;
 			}
-			puts("Me equivoque");
+			printf("\ndeteccion devuelve un: %d\n", deteccion);
 
 		}
 	}
@@ -335,7 +335,7 @@ static int validarTexto(char cadenaDeCaracteres[])
 				else
 				{
 					deteccion=-1;
-					puts("Salio mal");
+					puts("\nSalio mal, en funcion validarTexto\n");
 					break;
 				}
 

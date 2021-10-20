@@ -37,7 +37,7 @@ int main(void)
 
 	do
 	{
-		if(pedirTipoInt(&opcion, "\t*MENU*\n*1-ALTA DE SALON\n*2-ELIMINAR SALON\n*3-IMPRIMIR SALONES\n*4-INCORPORAR ARCADE\n*5-MODIFICAR ARCADE\n*6-ELIMINAR ARCADES\n*7-IMPRIMIR ARCADES\n*8-IMPRIMIR JUEGOS\n*9-SALIR\n", "MAL", 0, 3, 99)==0)
+		if(pedirTipoInt(&opcion, "\t*MENU*\n*1-ALTA DE SALON\n*2-ELIMINAR SALON\n*3-IMPRIMIR SALONES\n*4-INCORPORAR ARCADE\n*5-MODIFICAR ARCADE\n*6-ELIMINAR ARCADES\n*7-IMPRIMIR ARCADES\n*8-IMPRIMIR JUEGOS\n*9-SALIR\n", "MAL", 0, 9, 99)==0)
 		{
 			switch(opcion)
 			{
@@ -98,12 +98,14 @@ int main(void)
 				}
 				break;
 			case 5:
-				if(flagArcade==0)
+				if(flagArcade==0 && modificarArcade(listaArcades, CANT_ARCADES)==0)
 				{
-
-				}else
+					puts("\nLa modificacion se realizo con exito\n");
+				}
+				else
 				{
 					puts("Primero debe ingresar algun Arcade para der de baja, maquina");
+					printf("flag: %d", flagArcade);
 				}
 				break;
 			case 6:
@@ -135,9 +137,9 @@ int main(void)
 				}
 				break;
 			case 8:
-				if(flagArcade==0)
+				if(flagArcade==0 && arca_mostrarJuegos(listaArcades, CANT_ARCADES)==0)
 				{
-					arca_mostrarJuegos(listaArcades, CANT_ARCADES);
+					puts("\nSalio bien\n");
 				}
 
 			}

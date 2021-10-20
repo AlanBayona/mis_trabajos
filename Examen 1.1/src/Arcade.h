@@ -28,7 +28,7 @@ typedef struct{
 
 
 
-
+void mostrarJuegos(eJuego list[], int len);
 int listarJuegos(eJuego list[], int len, char* juego);
 int arcade_buscarPorId(eArcade arcades[], int len,int id);
 
@@ -41,15 +41,16 @@ int initArcade(eArcade listado[], int len);//completa
 //completa
 int agregarArcade(eArcade list[], int lenArcade);// completa
 int buscarArcadeVacio(eArcade list[], int lenArcade);
-
+int validarJuego(eJuego listaJuegos[], int len, char* juego);
 //funciones de modificacion
 int imprimirSoloArrayArcades(eArcade list[], int len);
+int modificarArcade(eArcade arcades[], int len);
 
 //BAJA
 int removerArcade(eArcade list[], int lenArcade);
 
 
-int arca_mostrarJuegos(listaArcades, CANT_ARCADES);
+int arca_mostrarJuegos(eArcade listaArcades[], int len);
 
 
 #endif /* ARCADE_H_ */
