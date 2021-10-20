@@ -8,6 +8,7 @@
 #ifndef ARCADE_H_
 #define ARCADE_H_
 
+
 typedef struct{
 		char nacionalidad[51];
 		int sonido;
@@ -20,9 +21,16 @@ typedef struct{
 
 } eArcade;
 
+typedef struct{
+	char listaDeJuegos[51];
+	int isEmpty;
+}eJuego;
 
 
 
+
+int listarJuegos(eJuego list[], int len, char* juego);
+int arcade_buscarPorId(eArcade arcades[], int len,int id);
 
 
 //funcion de inicio
@@ -30,15 +38,18 @@ int initArcade(eArcade listado[], int len);//completa
 
 
 //funciones de ALTA
-int validarId(eSalon list[], int len, int id);//completa
-int agregarArcade(eArcade list[], eSalon listado[], int lenSalon, int lenArcade);// completa
+//completa
+int agregarArcade(eArcade list[], int lenArcade);// completa
+int buscarArcadeVacio(eArcade list[], int lenArcade);
 
 //funciones de modificacion
-int imprimirArrayArcade(eArcade list[], int len);
 int imprimirSoloArrayArcades(eArcade list[], int len);
 
 //BAJA
 int removerArcade(eArcade list[], int lenArcade);
+
+
+int arca_mostrarJuegos(listaArcades, CANT_ARCADES);
 
 
 #endif /* ARCADE_H_ */

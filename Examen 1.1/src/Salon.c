@@ -133,16 +133,16 @@ int imprimirArraySalones(eSalon list[], int len)
 		{
 			if(list[i].isEmpty==1)
 			{
-
+				printf("\tID: %d\n",list[i].id);
 				printf("\tNombre: %s\n",list[i].nombre);
 				printf("\tDireccion: %s\n",list[i].direccion);
 				if(list[i].tipo==SHOPPING)
 				{
-					printf("\tTipo: Shopping\n");
+					printf("\tTipo: Shopping\n\n");
 				}
 				else
 				{
-					puts("\tTipo: Local\n");
+					puts("\tTipo: Local\n\n");
 				}
 			}
 		}
@@ -340,8 +340,8 @@ int removerSalon(eSalon list[], int len)
 
 int crearId(void)
 {
-  static int numeroMagico;
-	numeroMagico=0;
+  static int numeroMagico=0;
+
 		numeroMagico++;
 
 	return numeroMagico;

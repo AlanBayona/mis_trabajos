@@ -20,7 +20,8 @@
 #define CANT_ARCADES 4
 
 
-int main(void) {
+int main(void)
+{
 	setbuf(stdout, NULL);
 
 	eSalon listaSalones[CANT_SALONES];
@@ -86,7 +87,7 @@ int main(void) {
 				}
 				break;
 			case 4:
-				if(agregarArcade(listaArcades, listaSalones, CANT_SALONES, CANT_ARCADES)==0)
+				if(agregarArcade(listaArcades, CANT_ARCADES)==0)
 				{
 					flagArcade=0;
 					puts("\nAlta concretada.\nVolviendo al Menu...");
@@ -106,7 +107,7 @@ int main(void) {
 				}
 				break;
 			case 6:
-				if(flagArcade==0 && imprimirArrayArcade(listaArcades, CANT_ARCADES)==0)
+				if(flagArcade==0 )
 				{
 					if(removerArcade(listaArcades, CANT_ARCADES)==0)
 					{
@@ -124,7 +125,7 @@ int main(void) {
 				break;
 
 			case 7:
-				if(flagArcade==0 && imprimirSoloArrayArcades(listaArcades, CANT_ARCADES)==0);
+				if(flagArcade==0 && imprimirSoloArrayArcades(listaArcades, CANT_ARCADES)==0)
 				{
 					puts("\nVolviendo al Menu....");
 				}
@@ -133,6 +134,11 @@ int main(void) {
 					puts("ERROR");
 				}
 				break;
+			case 8:
+				if(flagArcade==0)
+				{
+					arca_mostrarJuegos(listaArcades, CANT_ARCADES);
+				}
 
 			}
 		}

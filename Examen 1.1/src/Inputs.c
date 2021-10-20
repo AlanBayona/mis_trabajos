@@ -90,8 +90,7 @@ int pedirDireccion(char cadenaDeCaracteres[], char* mensaje, char* mensajeError,
 		for(i=0; i<reintentos; i++)
 		{
 			printf("%s", mensaje);
-			//aca directamente usamos la funcion getFloat para cargar un numero float
-			if(myGets(bufferChar,sizeof(bufferChar))==0 && validarDireccion(bufferChar)==0)//ahi obtendremos la validacion mediante la funcion
+			if(myGets(bufferChar,sizeof(bufferChar))==0 && validarDireccion(bufferChar)==0)
 			{
 				deteccion=0;
 				strcpy(cadenaDeCaracteres, bufferChar);
@@ -99,20 +98,13 @@ int pedirDireccion(char cadenaDeCaracteres[], char* mensaje, char* mensajeError,
 			}
 			else
 			{
-				printf("%s", mensajeError);//mensaje de error por si la cosa se pone complicada xd
+				printf("%s", mensajeError);
 			}
 			}
 		}
 
 		return deteccion;
 }
-
-
-
-
-
-
-
 
 
 
