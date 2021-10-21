@@ -8,7 +8,7 @@
 #ifndef ARCADE_H_
 #define ARCADE_H_
 
-
+#include "Salon.h"
 typedef struct{
 		char nacionalidad[51];
 		int sonido;
@@ -44,6 +44,7 @@ int buscarArcadeVacio(eArcade list[], int lenArcade);
 int validarJuego(eJuego listaJuegos[], int len, char* juego);
 //funciones de modificacion
 int imprimirSoloArrayArcades(eArcade list[], int len);
+int imprimirArrayArcade(eArcade listadoArcades[], eSalon listadoSalones[], int lenArcade, int lenSalon);
 int modificarArcade(eArcade arcades[], int len);
 
 //BAJA

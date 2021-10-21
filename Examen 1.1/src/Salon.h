@@ -15,7 +15,6 @@ typedef struct{
 	int id;
 	int isEmpty;//0=vacio && 1=ocupado
 
-
 }eSalon;
 
 int crearId(void);

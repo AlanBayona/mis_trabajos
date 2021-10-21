@@ -10,9 +10,67 @@ static int validarEntero(char charDeEnteros[]);
 static int validarTexto(char cadenaDeCaracteres[]);
 static int validar_Correo(char cadenaDeCaracteres[]);
 static int validarDireccion(char cadenaDeCaracteres[]);
+static int validarChar(char* pLetra);
 
 
 //Entradas de tipo string
+
+
+
+
+
+int pedirChar(char* pCaracter, char* mensaje, char* mensajeError, char minimo, char maximo)
+{
+	int deteccion;
+	char bufferChar;
+	deteccion=-1;
+
+
+	if(pCaracter!=NULL && mensaje!=NULL && mensajeError!=NULL && maximo>minimo)
+	{
+		printf("%s", mensaje);
+						if(myGets(&bufferChar, sizeof(bufferChar))==0 && validarChar(&bufferChar)==0)
+						{
+							if(bufferChar>=minimo && bufferChar<=maximo)
+							{
+								*pCaracter=bufferChar;
+								deteccion=0;
+								break;
+							} else
+							{
+								printf("%s", mensajeError);
+							}
+						}
+
+
+
+	}
+
+
+	return deteccion;
+}
+
+
+static int validarChar(char* pLetra)
+{
+	int deteccion;
+	deteccion=-1;
+
+	if(pLetra!=NULL && (pLetra>='A' && pLetra<='Z') && (pLetra>='a' && pLetra<='z'))
+	{
+		deteccion=0;
+	}
+
+	return deteccion;
+}
+
+
+
+
+
+
+
+
 int pedir_texto(char cadenaDeCaracteres[], char* mensaje, char* mensajeError, int reintentos)
 {
 

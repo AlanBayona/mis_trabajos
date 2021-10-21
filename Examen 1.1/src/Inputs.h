@@ -17,6 +17,7 @@ int pedirTipoFloat(float* pResultado, char* mensaje, char* mensajeError, int min
 int pedir_texto(char cadenaDeCaracteres[], char* mensaje, char* mensajeError, int reintentos);
 int pedirCorreo(char cadenaDeCaracteres[], char* mensaje, char* mensajeError, int reintentos);
 int pedirDireccion(char cadenaDeCaracteres[], char* mensaje, char* mensajeError, int reintentos);
+int pedirChar(char* pCaracter, char* mensaje, char* mensajeError, char minimo, char maximo);
 
 
 

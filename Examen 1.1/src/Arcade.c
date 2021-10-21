@@ -115,7 +115,7 @@ int imprimirSoloArrayArcades(eArcade list[], int len)
 
 
 
-/*int imprimirArrayArcade(eArcade listadoArcades[], eSalon listadoSalones[], int lenArcade, int lenSalon)
+int imprimirArrayArcade(eArcade listadoArcades[], eSalon listadoSalones[], int lenArcade, int lenSalon)
 {
 	int deteccion;
 	deteccion=-1;
@@ -142,6 +142,7 @@ int imprimirSoloArrayArcades(eArcade list[], int len)
 					puts("\tTipo de sonido: Estereo\n");
 				}
 				mostrarRelacionPorId(listadoSalones, lenSalon, listadoArcades[i].idSalon);
+				printf("\t//ID que busco: %d\n", listadoArcades[i].idSalon);
 			}
 		}
 		deteccion=0;
@@ -149,7 +150,7 @@ int imprimirSoloArrayArcades(eArcade list[], int len)
 
 	return deteccion;
 }
-*/
+
 
 
 
@@ -159,6 +160,7 @@ static void mostrarRelacionPorId(eSalon list[], int len, int idABuscar)
 	{
 		if(list[i].isEmpty==1 && list[i].id==idABuscar)
 		{
+			puts("\tLOCAL");
 			printf("\n\tNombre: %s\n",list[i].nombre);
 			printf("\tDireccion: %s\n",list[i].direccion);
 			if(list[i].tipo==1)
@@ -287,25 +289,26 @@ int buscarArcadeVacio(eArcade list[], int lenArcade)
  *\param pido una array de una entidad, en este casi eArcade y su largo, siendo lenArcade
  *\return Devuelve -1 si hubo algun inconveniente y 0 si la funcion cumplio su objetivo
  */
-int removerArcade(eArcade list[], int lenArcade)
+int removerArcade(eArcade listArcades[], int lenArcade, eSalon listSalones, int lenSalon)
 {
 	int deteccion;
 	int idBuscado;
 	int opcion;
 	deteccion=-1;
-		if(list!=NULL && lenArcade>0)
+		if(listArcades!=NULL && lenArcade>0 && listSalones!=NULL && lenSalon>0)
 		{
+			imprimirArrayArcade(listArcades, listSalones, lenArcade, lenSalon)
 			if(pedirTipoInt(&idBuscado, "Ingrese el id que desee remover", "Invalido", 0, 999, 1)==0)
 			{
 				for(int i=0; i<lenArcade; i++)
 				{
-					if(list[i].id==idBuscado && list[i].isEmpty==1)
+					if(listArcades[i].id==idBuscado && listArcades[i].isEmpty==1)
 					{
 						if(pedirTipoInt(&opcion, "\n\tSeguro que desea borrar el Arcade?\n1-SI, MI REY.\n2-NO, ABORTE LA DECISION.\n", "Estas pendejo! solo hay dos optiones\n", 1, 2, 99)==0)
 						{
 							if(opcion==1)
 							{
-								list[i].isEmpty=0;
+								listArcades[i].isEmpty=0;
 								deteccion=0;
 								break;
 							}
@@ -460,7 +463,7 @@ int modificarArcade(eArcade arcades[], int len)
 						break;
 
 						case 2:
-							if(arca_mostrarJuegos(arcades, len)==0 && pedirDireccion(&nombreNuevoDelJuego, "\nIngresa el nuevo nombre del juego\n", "ERROR", 3)==0)
+							if(arca_mostrarJuegos(arcades, len)==0 && pedirDireccion(nombreNuevoDelJuego, "\nIngresa el nuevo nombre del juego\n", "ERROR", 3)==0)
 							{
 								strncpy(arcades[index].nombreDelJuego, nombreNuevoDelJuego, 51);
 								deteccion=0;
