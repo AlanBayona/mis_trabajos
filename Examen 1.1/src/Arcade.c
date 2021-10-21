@@ -113,8 +113,6 @@ int imprimirSoloArrayArcades(eArcade list[], int len)
 
 
 
-
-
 int imprimirArrayArcade(eArcade listadoArcades[], eSalon listadoSalones[], int lenArcade, int lenSalon)
 {
 	int deteccion;
@@ -289,7 +287,7 @@ int buscarArcadeVacio(eArcade list[], int lenArcade)
  *\param pido una array de una entidad, en este casi eArcade y su largo, siendo lenArcade
  *\return Devuelve -1 si hubo algun inconveniente y 0 si la funcion cumplio su objetivo
  */
-int removerArcade(eArcade listArcades[], int lenArcade, eSalon listSalones, int lenSalon)
+int removerArcade(eArcade listArcades[], int lenArcade, eSalon listSalones[], int lenSalon)
 {
 	int deteccion;
 	int idBuscado;
@@ -297,7 +295,7 @@ int removerArcade(eArcade listArcades[], int lenArcade, eSalon listSalones, int 
 	deteccion=-1;
 		if(listArcades!=NULL && lenArcade>0 && listSalones!=NULL && lenSalon>0)
 		{
-			imprimirArrayArcade(listArcades, listSalones, lenArcade, lenSalon)
+			imprimirArrayArcade(listArcades, listSalones, lenArcade, lenSalon);
 			if(pedirTipoInt(&idBuscado, "Ingrese el id que desee remover", "Invalido", 0, 999, 1)==0)
 			{
 				for(int i=0; i<lenArcade; i++)

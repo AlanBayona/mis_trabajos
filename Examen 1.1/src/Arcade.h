@@ -48,7 +48,7 @@ int imprimirArrayArcade(eArcade listadoArcades[], eSalon listadoSalones[], int l
 int modificarArcade(eArcade arcades[], int len);
 
 //BAJA
-int removerArcade(eArcade list[], int lenArcade);
+int removerArcade(eArcade listArcades[], int lenArcade, eSalon listSalones[], int lenSalon);
 
 
 int arca_mostrarJuegos(eArcade listaArcades[], int len);

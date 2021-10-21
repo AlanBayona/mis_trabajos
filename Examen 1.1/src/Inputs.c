@@ -35,7 +35,6 @@ int pedirChar(char* pCaracter, char* mensaje, char* mensajeError, char minimo, c
 							{
 								*pCaracter=bufferChar;
 								deteccion=0;
-								break;
 							} else
 							{
 								printf("%s", mensajeError);

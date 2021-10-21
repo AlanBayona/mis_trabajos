@@ -87,37 +87,10 @@ int initSalon(eSalon list[], int len)
 //Funciones del ALTA
 
 
-/*int addEmployee(Employee* list, int len, int id, char name[],char lastName[],float salary,int sector)
-{
-	int check;
-	int index;
-	check=-1;
-	if(list!=NULL && len>0 && id>0 && name!=NULL && lastName!=NULL && salary!=NULL && sector>0)
-	{
-		index=findEmpty(&list, len);
-		if(index>0)
-		{
-			list->id[index]=id;
-			strncpy(list->lastName[index], lastName, 51);
-			strncpy(list->lastName[index], lastName, 51);
-			list->salary[index]=salary;
-			list->sector[index]=sector;
-			check=0;
-		}
-	}
-
-	return check;
-} */
-
-
-
-
-
-
 /*
- * ebref Esta funcion cumple con el trabajo de imprimir
- * parametros Recibe un array de la entidad Employee y el largo del vector.
- * return Devuelve un 0 si salio bien y un -1 si salio mal.
+ * \brief Esta funcion cumple con el trabajo de imprimir
+ * \param Recibe un array de la entidad Employee y el largo del vector.
+ * \return Devuelve un 0 si salio bien y un -1 si salio mal.
  */
 
 int imprimirArraySalones(eSalon list[], int len)
@@ -283,7 +256,7 @@ int buscarPorId(eSalon list[], int len,int id)
 		  {
 			  for(int i=0; i<len; i++)
 			  {
-				  if(list[i].id==id)
+				  if(list[i].id==id && list[i].isEmpty==OCUPADO)
 				  {
 					  index=i;
 					  break;

@@ -113,7 +113,7 @@ int main(void)
 					if(flagArcade==0 && flagSalon)
 					{
 
-						if(removerArcade(listaArcades, CANT_ARCADES)==0)
+						if(removerArcade(listaArcades,CANT_ARCADES, listaSalones, CANT_SALONES)==0)
 						{
 							puts("Se elimino con exito.\n Volviendo al Menu...");
 						}
@@ -154,13 +154,12 @@ int main(void)
 					if(pedirChar(&opcionChar, "\t*MENU*\n*A)Listar los salones con más de 4 arcades\n*B) Listar los arcades para más de 2 jugadores\n*C) Listar toda la información de un salón en específico\n*D) Listar todos los arcades de un salón determinado\n*E) Imprimir el salón con más cantidad de arcades\n"
 											"*F) Imprimir el monto máximo en pesos que puede recaudar el salón \n*G) Ingresar el nombre de un juego e imprimir cuantos arcades lo contienen\n*8-IMPRIMIR JUEGOS\n*9-SALIR\n", "Error", 'A', 'Z')==0)
 					{
-							switch(opcionChar)
-							{
-							case 'A':
 
 
 
-							}
+
+
+
 					}
 				}
 				else
