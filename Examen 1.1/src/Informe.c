@@ -235,7 +235,7 @@ static void listarArcades(eArcade listaArcades[], int len, int idABuscar)
 
 
 
-int informe_listarInfoDeSalonBuscadoPorId(eSalon listaSalones[], eArcade listaArcades[], int lenSalon, int lenArcade)//E
+int informe_ImprimirSalonConMasArcades(eSalon listaSalones[], eArcade listaArcades[], int lenSalon, int lenArcade)//E
 {
 	int deteccion;
 	int indexSalon;
@@ -302,5 +302,4 @@ static int encontrarMaximo(eSalon listaSalones[], eArcade listaArcades[], int le
 
 	return indexSalon;
 }
-
 

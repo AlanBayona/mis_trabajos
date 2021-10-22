@@ -16,5 +16,6 @@ int informe_listarSalonesConMasDeCuatroArcades(eSalon listaSalones[], eArcade li
 int informe_listarArcadesParaMasDeDosJugadores(eSalon listaSalones[], eArcade listaArcades[], int lenSalon, int lenArcade);//b
 int informe_listarInfoDeSalonBuscadoPorId(eSalon listaSalones[], eArcade listaArcades[], int lenSalon, int lenArcade);//c
 int informe_listarArcadesDeUnSalonBuscadoPorId(eSalon listaSalones[], eArcade listaArcades[], int lenSalon, int lenArcade);//d
+int informe_ImprimirSalonConMasArcades(eSalon listaSalones[], eArcade listaArcades[], int lenSalon, int lenArcade);//e
 
 #endif /* INFORME_H_ */

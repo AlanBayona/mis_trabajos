@@ -348,10 +348,10 @@ int arca_mostrarJuegos(eArcade listArcades[], int len)
 	int deteccion;
 	int flag;
 	flag=0;
-	eJuego listaAuxJuegos[25];
+	eJuego listaAuxJuegos[1000];
 	deteccion=-1;
 
-	if(listArcades != NULL && len > 0 && initJuegos(listaAuxJuegos, 25)==0)
+	if(listArcades != NULL && len > 0 && initJuegos(listaAuxJuegos, 1000)==0)
 	{
 		for(int i=0; i<len; i++)
 
