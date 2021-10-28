@@ -22,7 +22,7 @@
 
 //funciones ALTA
 
-int agregarSalon(eSalon list[], int len)
+int agregarSalon(eSalon* list[], int len)
 {
 	int deteccion;
 	int index;
@@ -125,7 +125,7 @@ int imprimirArraySalones(eSalon list[], int len)
 	return deteccion;
 }
 
-int buscarSalonVacio(eSalon list[], int len)
+int buscarSalonVacio(eSalon* list[], int len)
 {
 	int index;
 	index=-1;
@@ -133,7 +133,7 @@ int buscarSalonVacio(eSalon list[], int len)
 	{
 		for(int i=0; i<len; i++)
 		{
-			if(list[i].isEmpty==LIBRE)//es 0 si esta libre
+			if(list[i]->isEmpty==LIBRE)//es 0 si esta libre
 			{
 				index=i;
 				break;
@@ -318,4 +318,24 @@ int crearId(void)
 		numeroMagico++;
 
 	return numeroMagico;
+}
+
+
+
+
+
+
+
+
+
+
+eSalon* display_new(void)
+{
+	eSalon* pDisplay = malloc(sizeof(eSalon));
+	if(pDisplay!=NULL)
+	{
+		pDisplay->isEmpty=0;
+		pDisplay->id=0;
+	}
+	return pDisplay;
 }
