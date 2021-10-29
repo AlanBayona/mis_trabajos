@@ -22,33 +22,30 @@
 
 //funciones ALTA
 
-int agregarSalon(eSalon list[], int len)
+int agregarSalon(eSalon* list[], int len)
 {
 	int deteccion;
 	int index;
-	eSalon salonAux;
+	eSalon* salonAux= salon_new();
 
 	deteccion=-1;
 	if(list!=NULL && len>0)
 	{
+		puts("Estoy por buscar un lugar vacio");
 		index=buscarSalonVacio(list, len);
 		if(index>=0){
-			if(pedir_texto(&salonAux.nombre, "Ingrese el nombre del salon:\n", "ERROR. Intente de nuevo", 2)==0)
+			if(pedir_texto(salonAux->nombre, "Ingrese el nombre del salon:\n", "ERROR. Intente de nuevo", 2)==0)
 			{
-				if(pedirDireccion(&salonAux.direccion, "Ingrese direccion del salon:\n", "ERROR B", 2)==0)
+				if(pedirDireccion(salonAux->direccion, "Ingrese direccion del salon:\n", "ERROR B", 2)==0)
 				{
-					if(pedirTipoInt(&salonAux.tipo, "\tIngrese tipo:\n1-Shopping\n2-Local\n", "ERROR C", 0, 3, 3)==0)
+					if(pedirTipoInt(&salonAux->tipo, "\tIngrese tipo:\n1-Shopping\n2-Local\n", "ERROR C", 0, 3, 3)==0)
 					{
-						salonAux.id=crearId();
-						if(salonAux.id>0)
+						salonAux->id=crearId();
+						if(salonAux->id>0)
 						{
-							strncpy(list[index].nombre, salonAux.nombre, 51);
-							strncpy(list[index].direccion, salonAux.direccion, 51);
-							list[index].tipo=salonAux.tipo;
-							list[index].id=salonAux.id;
-							list[index].isEmpty=OCUPADO;
+							list[index]=salonAux;
 
-							printf("\n*ID: %d - Nombre: %s - Direccion: %s\n", salonAux.id, salonAux.nombre, salonAux.direccion);
+							printf("\n*ID: %d - Nombre: %s - Direccion: %s\n", list[index]->id, list[index]->nombre, list[index]->direccion);
 							deteccion=0;
 
 						}
@@ -56,7 +53,7 @@ int agregarSalon(eSalon list[], int len)
 				}
 			}
 		}
-	}
+	}else {puts("ACA");}
 
 
 	return deteccion;
@@ -66,7 +63,7 @@ int agregarSalon(eSalon list[], int len)
 
 
 
-int initSalon(eSalon list[], int len)
+int initSalon(eSalon* list[], int len)
 {
 	int deteccion;
 	deteccion=-1;
@@ -75,7 +72,7 @@ int initSalon(eSalon list[], int len)
 		for(int i=0; i<len; i++)
 		{
 
-			list[i].isEmpty=0;//significa que esta vacio
+			list[i]=NULL;//significa que esta vacio
 		}
 		deteccion=0;
 	}
@@ -93,7 +90,7 @@ int initSalon(eSalon list[], int len)
  * \return Devuelve un 0 si salio bien y un -1 si salio mal.
  */
 
-int imprimirArraySalones(eSalon list[], int len)
+int imprimirArraySalones(eSalon* list[], int len)
 
 {
 	int deteccion;
@@ -104,12 +101,12 @@ int imprimirArraySalones(eSalon list[], int len)
 		printf("\n\t\tLista de los Salones:\n");
 		for(int i=0; i< len; i++)
 		{
-			if(list[i].isEmpty==1)
+			if(list[i]!=NULL)
 			{
-				printf("\tID: %d\n",list[i].id);
-				printf("\tNombre: %s\n",list[i].nombre);
-				printf("\tDireccion: %s\n",list[i].direccion);
-				if(list[i].tipo==SHOPPING)
+				printf("\tID: %d\n",list[i]->id);
+				printf("\tNombre: %s\n",list[i]->nombre);
+				printf("\tDireccion: %s\n",list[i]->direccion);
+				if(list[i]->tipo==SHOPPING)
 				{
 					printf("\tTipo: Shopping\n\n");
 				}
@@ -125,23 +122,21 @@ int imprimirArraySalones(eSalon list[], int len)
 	return deteccion;
 }
 
-int buscarSalonVacio(eSalon list[], int len)
+int buscarSalonVacio(eSalon* list[], int len)
 {
 	int index;
 	index=-1;
-	if(list!=NULL && len>0)
-	{
+	puts("Dentro de buscarSalon");
 		for(int i=0; i<len; i++)
 		{
-			if(list[i].isEmpty==LIBRE)//es 0 si esta libre
+			puts("Dentro del for");
+			if(list[i]==NULL && len>0)//es 0 si esta libre
 			{
 				index=i;
+				printf("\nIndice vacio= %d\n",i);
 				break;
 			}
 		}
-	}
-
-
 
 	return index;
 }
@@ -247,7 +242,7 @@ int verificarSalones(eSalon list[], int len)
 }*/
 
 
-int buscarPorId(eSalon list[], int len,int id)
+int buscarPorId(eSalon* list[], int len,int id)
 {
   int index;
   index=-1;
@@ -256,7 +251,7 @@ int buscarPorId(eSalon list[], int len,int id)
 		  {
 			  for(int i=0; i<len; i++)
 			  {
-				  if(list[i].id==id && list[i].isEmpty==OCUPADO)
+				  if(list[i]->id==id && list[i]!=NULL)
 				  {
 					  index=i;
 					  break;
@@ -271,7 +266,7 @@ int buscarPorId(eSalon list[], int len,int id)
 //funcion de BAJA
 
 
-int removerSalon(eSalon list[], int len)
+int removerSalon(eSalon* list[], int len)
 {
 	int deteccion;
 	int idBuscado;
@@ -282,9 +277,10 @@ int removerSalon(eSalon list[], int len)
 			{
 				for(int i=0; i<len; i++)
 				{
-					if(list[i].id==idBuscado && list[i].isEmpty==1)
+					if(list[i]->id==idBuscado && list[i]!=NULL)
 					{
-						list[i].isEmpty=0;
+					//	free(list[i]);​
+						list[i] = NULL;
 						deteccion=0;
 						break;
 					}
@@ -318,4 +314,19 @@ int crearId(void)
 		numeroMagico++;
 
 	return numeroMagico;
+}
+
+
+
+
+
+eSalon* salon_new(void)
+{
+	eSalon* pSalon = malloc(sizeof(pSalon));
+	if(pSalon!=NULL)
+	{
+		pSalon->isEmpty=0;
+		pSalon->id=0;
+	}
+	return pSalon;
 }

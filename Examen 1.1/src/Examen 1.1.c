@@ -24,8 +24,8 @@ int main(void)
 {
 	setbuf(stdout, NULL);
 
-	eSalon listaSalones[CANT_SALONES];
-	eArcade listaArcades[CANT_ARCADES];
+	eSalon* listaSalones[CANT_SALONES];
+	eArcade* listaArcades[CANT_ARCADES];
 	int opcion;
 	int opcionChar;
 	int flagSalon;
@@ -34,7 +34,7 @@ int main(void)
 	flagSalon=-1;
 
 	initSalon(listaSalones, CANT_SALONES);
-	initArcade(listaArcades, CANT_ARCADES);
+	//initArcade(listaArcades, CANT_ARCADES);// debo mejorar
 
 	do
 	{
