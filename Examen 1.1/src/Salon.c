@@ -129,8 +129,12 @@ int buscarSalonVacio(eSalon* list[], int len)
 	puts("Dentro de buscarSalon");
 		for(int i=0; i<len; i++)
 		{
+<<<<<<< HEAD
 			puts("Dentro del for");
 			if(list[i]==NULL && len>0)//es 0 si esta libre
+=======
+			if(list[i]->isEmpty==LIBRE)//es 0 si esta libre
+>>>>>>> 544e499401b406f5a4bf490dac2316e1ca0b4b6a
 			{
 				index=i;
 				printf("\nIndice vacio= %d\n",i);
@@ -320,6 +324,7 @@ int crearId(void)
 
 
 
+<<<<<<< HEAD
 eSalon* salon_new(void)
 {
 	eSalon* pSalon = malloc(sizeof(pSalon));
@@ -329,4 +334,20 @@ eSalon* salon_new(void)
 		pSalon->id=0;
 	}
 	return pSalon;
+=======
+
+
+
+
+
+eSalon* display_new(void)
+{
+	eSalon* pDisplay = malloc(sizeof(eSalon));
+	if(pDisplay!=NULL)
+	{
+		pDisplay->isEmpty=0;
+		pDisplay->id=0;
+	}
+	return pDisplay;
+>>>>>>> 544e499401b406f5a4bf490dac2316e1ca0b4b6a
 }
