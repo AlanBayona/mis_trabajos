@@ -30,11 +30,11 @@ typedef struct{
 
 void mostrarJuegos(eJuego list[], int len);
 int listarJuegos(eJuego list[], int len, char* juego);
-int arcade_buscarPorId(eArcade arcades[], int len,int id);
+int arcade_buscarPorId(eArcade* arcades[], int len,int id);
 
 
 //funcion de inicio
-int initArcade(eArcade listado[], int len);//completa
+int initArcade(eArcade* listado[], int len);//completa
 
 
 //funciones de ALTA
@@ -43,7 +43,7 @@ int agregarArcade(eArcade list[], int lenArcade);// completa
 int buscarArcadeVacio(eArcade list[], int lenArcade);
 int validarJuego(eJuego listaJuegos[], int len, char* juego);
 //funciones de modificacion
-int imprimirSoloArrayArcades(eArcade list[], int len);
+int imprimirSoloArrayArcades(eArcade* list[], int len);
 int imprimirArrayArcade(eArcade listadoArcades[], eSalon listadoSalones[], int lenArcade, int lenSalon);
 int modificarArcade(eArcade arcades[], int len);
 

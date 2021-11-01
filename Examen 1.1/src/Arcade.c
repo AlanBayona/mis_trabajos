@@ -45,7 +45,7 @@ static int initJuegos(eJuego juegos[], int len)
 
 
 
-int initArcade(eArcade listado[], int len)
+int initArcade(eArcade* listado[], int len)
 {
 	int deteccion;
 	deteccion=-1;
@@ -54,7 +54,7 @@ int initArcade(eArcade listado[], int len)
 		for(int i=0; i<len; i++)
 		{
 
-			listado[i].isEmpty=0;//significa que esta vacio
+			listado[i]=NULL;//significa que esta vacio
 		}
 		deteccion=0;
 	}
@@ -77,7 +77,7 @@ int initArcade(eArcade listado[], int len)
 
 
 
-int imprimirSoloArrayArcades(eArcade list[], int len)
+int imprimirSoloArrayArcades(eArcade* list[], int len)
 {
 	int deteccion;
 	deteccion=-1;
@@ -87,15 +87,15 @@ int imprimirSoloArrayArcades(eArcade list[], int len)
 		printf("\n\t\tLista de los Arcade:\n");
 		for(int i=0; i< len; i++)
 		{
-			if(list[i].isEmpty==1)
+			if(list[i]!=NULL)
 			{
 
-				printf("\t\tID: %d\n",list[i].id);
-				printf("\tNacionalidad: %s\n",list[i].nacionalidad);
-				printf("\tNombre del juego: %s\n",list[i].nombreDelJuego);
-				printf("\tCantidad de jugadores: %d\n",list[i].cant_jugadores);
-				printf("\tCantidad de fichas maxima: %d\n",list[i].fichasMaxima);
-				if(list[i].sonido==MONO)
+				printf("\t\tID: %d\n",list[i]->id);
+				printf("\tNacionalidad: %s\n",list[i]->nacionalidad);
+				printf("\tNombre del juego: %s\n",list[i]->nombreDelJuego);
+				printf("\tCantidad de jugadores: %d\n",list[i]->cant_jugadores);
+				printf("\tCantidad de fichas maxima: %d\n",list[i]->fichasMaxima);
+				if(list[i]->sonido==MONO)
 				{
 					printf("\tTipo de sonido: Mono\n");
 				}
@@ -476,7 +476,7 @@ int modificarArcade(eArcade arcades[], int len)
 
 
 
-int arcade_buscarPorId(eArcade arcades[], int len,int id)
+int arcade_buscarPorId(eArcade* arcades[], int len,int id)
 {
   int index;
   index=-1;
@@ -485,7 +485,7 @@ int arcade_buscarPorId(eArcade arcades[], int len,int id)
 		  {
 			  for(int i=0; i<len; i++)
 			  {
-				  if(arcades[i].id==id && arcades[i].isEmpty==OCUPADO)
+				  if(arcades[i]->id==id && arcades[i]!=NULL)
 				  {
 					  index=i;
 					  break;
@@ -494,3 +494,7 @@ int arcade_buscarPorId(eArcade arcades[], int len,int id)
 		  }
 		  	 return index;
 }
+
+
+
+
