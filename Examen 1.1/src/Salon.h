@@ -21,7 +21,7 @@ int crearId(void);
 int buscarSalonVacio(eSalon* list[], int len);
 int buscarPorId(eSalon* list[], int len,int id);
 int imprimirArraySalones(eSalon* list[], int len);//perteneciente al punto 3
-int verificarSalones(eSalon list[], int len);
+int verificarSalones(eSalon* list[], int len);
 
 //funciones de Alta
 int initSalon(eSalon* list[], int len);

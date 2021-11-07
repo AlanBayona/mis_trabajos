@@ -143,8 +143,12 @@ int buscarSalonVacio(eSalon* list[], int len)
 }
 
 
-
-int verificarSalones(eSalon list[], int len)
+/*
+ * \brief esta funcion buscar si esta al menos se cargo 1 un salon
+ * \param tiene como parametrps una list de eSalon
+ *
+ */
+int verificarSalones(eSalon* list[], int len)
 {
 	int index;
 	index=-1;
@@ -152,7 +156,7 @@ int verificarSalones(eSalon list[], int len)
 	{
 		for(int i=0; i<len; i++)
 		{
-			if(list[i].isEmpty==OCUPADO)//es 0 si esta libre
+			if(list[i]!=NULL)//es 0 si esta libre
 			{
 				index=i;
 				break;
@@ -170,77 +174,7 @@ int verificarSalones(eSalon list[], int len)
 
 
 
-//funciones Modificacion
-
-/*int modifyEmployeebyId(Employee* list, int len, int id, int option)
-{
-	int check;
-	int indexEmployee;
-	char nombreAux[len];
-	char apellidoAux[len];
-	float salarioAux;
-	int sectorAux;
-
-	check=-1;
-
-
-		if(list!=NULL && len>0)
-		{
-			indexEmployee=findEmployeeById(&list, len, id);
-			switch(option)
-			{
-			  case 1:
-				 if(pedir_texto(&nombreAux, "ingrese el nuevo nombre el empleado.", "ERROR. VOLVIENDO AL MENU", 1)==0)
-				 {
-					 strncpy(list[indexEmployee]->name, nombreAux, len);
-				 }
-				 else
-				 {
-					 check=-1;
-				 }
-				 break;
-			  case 2:
-				 if(pedir_texto(&apellidoAux, "ingrese el nuevo apellido del empleado.", "ERROR. VOLVIENDO AL MENU", 1)==0)
-				 {
-					 strncpy(list[indexEmployee]->lastName, apellidoAux, len);
-				 }
-				 else
-				 {
-				 	 check=-1;
-				 }
-				 break;
-			  case 3:
-				  if(pedirTipoFloat(&salarioAux, "Ingrese le nuevo salario del empleado", "ERROR. VOLVIENDO AL MENU...", -999999999999.999999, 9999999.9999999, 1)==0)
-				  {
-					  list[indexEmployee]->salary=salarioAux;
-				  }
-				  else
-				  {
-					  check=-1;
-				  }
-				  break;
-			  case 4:
-				  if(pedirTipoInt(&sectorAux, "Ingrese el sector en cual sera movido el empleado", "ERROR", 0, 6, 1)==0)
-				  {
-					  list[indexEmployee]->sector=sectorAux;
-				  }
-				  else
-				  {
-					  check=-1;
-				  }
-				  break;
-			  case 5:
-				  check=1;
-				  break;
-
-			}
-
-		}
-
-
-
-	return check;
-}*/
+//funcion de modificacion
 
 
 int buscarPorId(eSalon* list[], int len,int id)
