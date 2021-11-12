@@ -34,16 +34,16 @@ struct LinkedList
 
 
 //Publicas
-LinkedList* ll_newLinkedList(void);
-int ll_len(LinkedList* this);
+LinkedList* ll_newLinkedList(void); //Crea y retorna un nuevo LinkedList. Es el constructor, ya que en él crearemos la struct y daremos valores iniciales a los campos.
+int ll_len(LinkedList* this); //>Retorna el tamaño del LinkedList
 Node* test_getNode(LinkedList* this, int nodeIndex);
 int test_addNode(LinkedList* this, int nodeIndex,void* pElement);
-int ll_add(LinkedList* this, void* pElement);
-void* ll_get(LinkedList* this, int index);
+int ll_add(LinkedList* this, void* pElement); //Agrega un elemento al final de LinkedList.
+void* ll_get(LinkedList* this, int index);//Retorna un puntero al elemento que se encuentra en el índice especificado.
 int ll_set(LinkedList* this, int index,void* pElement);
-int ll_remove(LinkedList* this,int index);
+int ll_remove(LinkedList* this,int index);//Elimina un elemento en LinkedList, en el índice especificado.
 int ll_clear(LinkedList* this);
-int ll_deleteLinkedList(LinkedList* this);
+int ll_deleteLinkedList(LinkedList* this); // Elimina el LinkedList
 int ll_indexOf(LinkedList* this, void* pElement);
 int ll_isEmpty(LinkedList* this);
 int ll_push(LinkedList* this, int index, void* pElement);

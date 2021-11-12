@@ -13,6 +13,7 @@
  */
 int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
 {
+
     return 1;
 }
 
@@ -37,7 +38,10 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
  */
 int controller_addEmployee(LinkedList* pArrayListEmployee)
 {
-    return 1;
+	int deteccion;
+
+
+    return deteccion;
 }
 
 /** \brief Modificar datos de empleado

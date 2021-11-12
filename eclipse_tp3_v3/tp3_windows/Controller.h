@@ -1,3 +1,10 @@
+#ifndef controller_H_INCLUDED
+#define controller_H_INCLUDED
+
+
+#endif
+
+
 int controller_loadFromText(char* path , LinkedList* pArrayListEmployee);
 int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee);
 int controller_addEmployee(LinkedList* pArrayListEmployee);
