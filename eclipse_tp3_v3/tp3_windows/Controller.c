@@ -85,18 +85,53 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 	int deteccion;
 	int index;
 	int opcion;
+	char nombreAux[64];
+	int sueldoAux;
+	int horasAux;
+	int idAux;
 	if(pArrayListEmployee!=NULL && pedirTipoInt(&index, "Ingrese la posicion del empleado que desee modificar\n", "\nError en la funcion editEmployee\n", 0, pArrayListEmployee->size, 1)==0)
 	{
 		Employee* empleadoAux=ll_get(pArrayListEmployee, index);
 
-		switch(opcion)
+		if(pedirTipoInt(&opcion, "\n\tCAMPOS\n1. Editar Nombre.\n2. Editar sueldo\n3. Editar horas trabajadas.\n4. SALIR", "Error en la funcion de editEmployee\n", 1, 5,999)==0)
 		{
-			case 1:
-				break;
-			case 2:
-				break;
-			case 3:
-				break;
+
+			while(opcion!=4)
+			{
+					switch(opcion)
+				{
+					case 1:
+						if(pedir_texto(&nombreAux, "Ingrese el nuevo nombre del empleado", "ERROR", 1)==0)
+						{
+							if(employee_setNombre(empleadoAux, nombreAux)==0)
+							{
+								puts("Nombre actualizado");
+							}
+
+						}
+						break;
+					case 2:
+						if(pedirTipoInt(&sueldoAux, "Ingrese el nuevo sueldo\n", "ERROR/editemployee\n" , 0, 99999)==0)
+						{
+							if(employee_setSueldo(empleadoAux, sueldoAux)==0)
+							{
+								puts("Sueldo actualizado");
+							}
+						}
+						break;
+					case 3:
+						if(pedirTipoInt(&horasAux, "Ingrese la nueva cantidad de horas trabajadas\n", "Error.\n", 1, 9999, 1)==0)
+						{
+							if(employee_setHorasTrabajadas(empleadoAux, horasAux)==0)
+							{
+								puts("Horas de trabajo actualizada");
+							}
+						}
+						break;
+				}
+
+			}
+			deteccion=0;
 		}
 	}
 
@@ -117,7 +152,23 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_removeEmployee(LinkedList* pArrayListEmployee)
 {
-    return 1;
+	int deteccion=-1;
+	int indexABorrar;
+	Employee* empleadoAux;
+	if(pArrayListEmployee!=NULL)
+	{
+		if(pedirTipoInt(&indexABorrar, "Ingrese la posion del empleado que desee deletear\n", "ERROR. pedirtipo\n", 0, ll_len(pArrayListEmployee), 1)==0)
+		{
+			empleadoAux=ll_get(pArrayListEmployee, indexABorrar);
+			employee_delete(empleadoAux);
+			ll_remove(pArrayListEmployee, indexABorrar);
+			deteccion=0;
+		}
+	}
+
+
+
+    return deteccion;
 }
 
 /** \brief Listar empleados
@@ -129,7 +180,36 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_ListEmployee(LinkedList* pArrayListEmployee)
 {
-    return 1;
+	int deteccion;
+	deteccion=-1;
+	Employee* empleadoAux=employee_new();
+	char nombreAux[64];
+	int sueldoAux;
+	int idAux;
+	int horasAux;
+	if(pArrayListEmployee!=NULL && empleadoAux!=NULL)
+	{
+		for(int i=0; i<ll_len(pArrayListEmployee); i++)
+		{
+			empleadoAux=ll_get(pArrayListEmployee,i);
+			if(employee_getHorasTrabajadas(empleadoAux, horasAux)==0 && employee_getId(empleadoAux, idAux)==0 && employee_getNombre(empleadoAux, nombreAux)==0 && employee_getSueldo(empleadoAux, sueldoAux)==0)
+			{
+				puts("\n\tLISTA DE EMPLEADOS:");
+				printf("*NOMBRE: [%s]\t\tID: [%d]\t\tHORAS TRABAJADAS: [%d]\t\tSUELDO: [%d]\n\n", nombreAux, idAux, horasAux, sueldoAux);
+			}
+
+		}
+		deteccion=0;
+	}
+	else
+	{
+		employee_delete(empleadoAux);
+	}
+
+
+
+
+    return deteccion;
 }
 
 /** \brief Ordenar empleados
