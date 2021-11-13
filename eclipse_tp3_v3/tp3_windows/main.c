@@ -36,7 +36,7 @@ int main()
             case 2:
             	break;
             case 3:
-            	//int controller_addEmployee(LinkedList* pArrayListEmployee);
+            	controller_addEmployee(listaEmpleados);
             	break;
             case 4:
          //   	int controller_editEmployee(LinkedList* pArrayListEmployee);
@@ -68,7 +68,7 @@ int main()
 
 
 //funciones del tp 4
-
+/*
 static Node* getNode(LinkedList* this, int nodeInex)
 {
 	Node* nodoAuxiliar=NULL;

@@ -11,6 +11,7 @@ static int validarTexto(char cadenaDeCaracteres[]);
 static int validar_Correo(char cadenaDeCaracteres[]);
 static int validarDireccion(char cadenaDeCaracteres[]);
 static int validarChar(char* pLetra);
+static int validarNumeroTexto(char cadenaDeCaracteres[]);
 
 
 //Entradas de tipo string
@@ -460,4 +461,78 @@ static int validarDireccion(char cadenaDeCaracteres[])
 		}
 	}
 	return deteccion;
+}
+
+
+int pedir_NumeroTexto(char cadenaDeCaracteres[], char* mensaje, char* mensajeError, int reintentos)
+{
+
+	int deteccion;
+	int i;
+	char bufferChar[64];
+	deteccion=-1;
+
+	if(cadenaDeCaracteres!=NULL && mensaje!=NULL && mensajeError!=NULL && reintentos!=0)
+	{
+		for(i=0; i<reintentos; i++)
+		{
+			printf("%s", mensaje);
+
+			if(myGets(bufferChar,sizeof(bufferChar))==0 && validarNumeroTexto(bufferChar)==0)
+			{
+				deteccion=0;
+				strcpy(cadenaDeCaracteres, bufferChar);
+						break;
+			}
+			else
+			{
+				printf("%s", mensajeError);//mensaje de error por si la cosa se pone complicada xd
+			}
+			}
+		}
+
+		return deteccion;
+	}
+
+
+
+static int validarNumeroTexto(char cadenaDeCaracteres[])
+{
+	int deteccion;
+	deteccion=-1;
+	if(cadenaDeCaracteres!=NULL && strlen(cadenaDeCaracteres)>0)
+	{
+		for(int i=0; cadenaDeCaracteres[i]!='\0'; i++)
+		{
+
+				if((cadenaDeCaracteres[i]>='0' && cadenaDeCaracteres[i]<='9'))//donde 48=0 y 57=9 en ascii
+				{
+						deteccion=0;//osea que esta saliendo b
+						puts("Salio bien de la funcion [validarNumeroTexto]");
+				}
+				else
+				{
+					deteccion=-1;
+					puts("\nSalio mal, en funcion validarNumeroTexto\n");
+					break;
+				}
+
+		}
+	}
+	return deteccion;
+}
+
+
+/**
+ * \brief Crea un id de manera creciente
+ * \param void
+ * \return Retorna numeroMagico que sera un numero que ira creciendo cada vez que se llame
+ */
+int crearId(void)
+{
+  static int numeroMagico=0;
+
+		numeroMagico++;
+
+	return numeroMagico;
 }

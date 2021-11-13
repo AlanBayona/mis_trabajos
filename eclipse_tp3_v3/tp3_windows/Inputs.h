@@ -16,5 +16,6 @@ int pedir_texto(char cadenaDeCaracteres[], char* mensaje, char* mensajeError, in
 int pedirCorreo(char cadenaDeCaracteres[], char* mensaje, char* mensajeError, int reintentos);
 int pedirDireccion(char cadenaDeCaracteres[], char* mensaje, char* mensajeError, int reintentos);
 int pedirChar(char* pCaracter, char* mensaje, char* mensajeError, char minimo, char maximo);
-
+int pedir_NumeroTexto(char cadenaDeCaracteres[], char* mensaje, char* mensajeError, int reintentos);
+int crearId(void);
 #endif /* INPUTS_H_ */
