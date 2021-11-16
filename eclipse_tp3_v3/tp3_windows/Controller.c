@@ -248,11 +248,3 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
     return 1;
 }
 
-
-
-
-
-int controller_editElementEmployee()
-{
-
-}
