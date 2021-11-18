@@ -248,3 +248,64 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
     return 1;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//tp 4
+
+typedef struct{
+	int nota1;
+	int nota2;
+	float promedio;
+
+
+}Alumno;
+
+int main(void)
+{
+	setbuf(stdout,NULL);
+
+	LinkedList* listaAlumnos=ll_newLinkedList();
+	Alumno* a;
+
+
+	for(int i=0; i<10; i++)
+	{
+		a=(Alumno*)calloc(sizeof(Alumno),1);
+		if(a!=NULL)
+		{
+			ll_add(listaAlumnos, a);
+		}
+	}
+
+	for(int i=0; i<ll_len(listaAlumnos); i++)
+	{
+		a=ll_get(listaAlumnos,i);
+		printf("A%d)\tNota1: %d\tNota2: %d\tPromedio: %2f\n", i+1, a->nota1,a->nota2,a->promedio);
+	}
+
+
+	return 0;
+}
+
+//SORT        : ORDENAR
+//MAP         : Permite transformar los elementos de una lista
+//REDUCE      : Ejecuta una funcion rductora sobre cada elemento, devolviendo como unico resultado un
+//FILTER      :	Filtra todos los elementos que cumplan la condicion implementada por la funcion dada
+
+

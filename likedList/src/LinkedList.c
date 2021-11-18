@@ -342,11 +342,96 @@ LinkedList* ll_clone(LinkedList* this)
  * \return int Retorna  (-1) Error: si el puntero a la listas es NULL
                                 ( 0) Si ok
  */
-int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
+int ll_sort(LinkedList* this, int (*pFunc)(void*, void*), int order)
 {
-    int returnAux =-1;
+	int deteccion=-1;
+	int i;
+	int disorderedState=1;
+	int criterio;
+	void* pElement;
+	void* pElement2;
 
-    return returnAux;
+
+
+	if(this!=NULL && pFunc !=NULL && (order==0 || order==1))
+	{
+		while(disorderedState)
+		{
+			disorderedState=0;
+			for(i=0; i<ll_len(this)-1;i++)
+			{
+				pElement=ll_get(this, i);
+				pElement2=ll_get(this, i+1);
+				//LLAMO A MI FUNCION CRITERIO PARA HACER O NO EL SWAP
+				criterio=pFunc(pElement, pElement2);
+
+				if((order==1 && criterio==1) || (order==0 && criterio==-1))
+				{
+					//SWAP
+					ll_set(this, i, pElement2);
+					ll_set(this, i+1, pElement);
+					disorderedState=1;
+				}
+			}
+		}
+	}
+
+		return deteccion;
 
 }
 
+
+int ll_filter(LinkedList* this, void(*pFunc)(void*))
+{
+	int deteccion=-1;
+	int criterio;
+	void* pAux;
+
+
+	if(this!=NULL & pFunc!=NULL)
+	{
+		for(int i=0; i<ll_len(this); i++)
+		{
+			pAux=ll_get(this, i);
+
+			if(pAux!=NULL)
+			{
+				criterio=pFunc(pAux);
+				if(criterio==0)
+				{
+					deteccion=ll_remove(this, i);
+				}
+			}
+		}
+	}
+
+
+
+
+	return deteccion;
+}
+
+
+
+int ll_map(LinkedList* this, int (*pFunc)(void*))
+{
+	int deteccion=-1;
+	void* pElementAux;
+
+	if(this!=NULL && pFunc!=NULL)
+	{
+		deteccion=0;
+		for(int i=0; i<ll_len(this); i++)
+		{
+			pElementAux=ll_get(this,i);
+			if(pElementAux!=NULL)
+			{
+				//mapeo
+				pFunc(pElementAux);
+			}
+		}
+	}
+
+
+	return deteccion;
+}
