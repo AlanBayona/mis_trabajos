@@ -14,8 +14,23 @@
  */
 int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
 {
+	int deteccion=-1;
+	FILE* pArchivo;
 
-    return 1;
+	if(pArrayListEmployee!=NULL && path!=NULL)
+	{
+		if(ll_isEmpty(pArrayListEmployee)==1)
+		{
+			if((pArchivo=fopen(path,"rb"))==NULL)
+			{
+
+			}
+		}
+	}
+
+
+
+    return deteccion;
 }
 
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo binario).
@@ -25,9 +40,31 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
  * \return int
  *
  */
-int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
+int controller_loadFromBinary(char* path,LinkedList* pArrayListEmployee)
 {
-    return 1;
+	int deteccion=-1;
+
+	FILE* fpArchivo;
+	int idAux;
+	char nombreAux[64];
+	int horasAux;
+	int sueldoAux;
+
+	if(pArrayListEmployee!=NULL && path!=NULL)
+	{
+		fpArchivo=fopen(path, "w");
+		for(int i=0; i<ll_len(pArrayListEmployee); i++)
+		{
+
+		}
+	}
+
+
+
+
+
+
+    return deteccion;
 }
 
 /** \brief Alta de empleados
@@ -221,7 +258,34 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_sortEmployee(LinkedList* pArrayListEmployee)
 {
-    return 1;
+	int deteccion=-1;
+	int opcion;
+	if(pArrayListEmployee!=NULL)
+	{
+		if(pedirTipoInt(&opcion, "\tMenu\n1) Ordenar por sueldo\n2) Ordenar por horas trabajadas\n3) Ordenar por Nombre\n4) SALIR\n", "ERROR\n", 1, 4, 99)==0)
+		{
+			switch(opcion)
+			{
+				case 1:
+					deteccion=ll_sort(pArrayListEmployee, OrdenarPorSueldo, 1);
+					puts("Ordenando...");
+					break;
+				case 2:
+					deteccion=ll_sort(pArrayListEmployee, OrdenarPorHora, 1);
+					puts("Ordenando...");
+					break;
+				case 3:
+					deteccion=ll_sort(pArrayListEmployee, OrdenarPorNombre, 1);
+					puts("Ordenando...");
+					break;
+				case 4:
+					puts("Saliendo...\n");
+					break;
+			}
+		}
+	}
+
+    return deteccion;
 }
 
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).
@@ -245,7 +309,15 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
  */
 int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
 {
-    return 1;
+	int deteccion=-1;
+	FILE* pArchivoBinario=fopen()
+
+		if(path!=NULL && pArrayListEmployee!=NULL)
+		{
+
+		}
+
+    return deteccion;
 }
 
 
