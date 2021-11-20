@@ -86,7 +86,7 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
 	{
 			if(pedir_NumeroTexto(&nombreAux, "Ingrese el nombre del empleado ingresado\n", "Error", 1)==0)
 			{
-				if(pedirTipoInt(&horasTrabajadasAux, "Ingrese las hora del trabajas por el empleado\n ", "Error al pedir horas\n", 1)==0)
+				if(pedirTipoInt(&horasTrabajadasAux, "Ingrese las hora del trabajas por el empleado\n ", "Error al pedir horas\n", 1,999, 99)==0)
 				{
 					if(pedirTipoInt(&sueldoAux, "Ingrese el sueldo del empleado\n", "Error al ingresar sueldo", 1, 37000, 1)==0)
 					{
@@ -102,7 +102,6 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
 					}
 				}
 			}
-
 	}
 
 
