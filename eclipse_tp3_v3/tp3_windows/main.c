@@ -23,7 +23,9 @@
 
 int main()
 {
+	setbuf(stdout, NULL);
     int option = 0;
+    int flagDeCarga=0;
 
     LinkedList* listaEmpleados = ll_newLinkedList();
     do{
@@ -31,30 +33,99 @@ int main()
         switch(option)
         {
             case 1:
+            	if(flagDeCarga==0)
+            	{
                 controller_loadFromText("data.csv",listaEmpleados);
+            	flagDeCarga=1;
+            	}
+            	else
+            	{
+            		puts("Los datos ya fueron cargdos, maquina");
+            	}
                 break;
             case 2:
+            	if(flagDeCarga==0)
+            	{
+            		controller_loadFromBinary("binario.bin", listaEmpleados);
+            		flagDeCarga=1;
+            	}
+            	else
+            	{
+            		puts("Ya fue cargado de manera binaria, fuera...");
+            	}
             	break;
             case 3:
             	controller_addEmployee(listaEmpleados);
             	break;
             case 4:
-         //   	int controller_editEmployee(LinkedList* pArrayListEmployee);
+            	if(ll_isEmpty(listaEmpleados)==0)
+            	{
+            		if(controller_ListEmployee(listaEmpleados)==0)
+            		{
+            			puts("\n");
+            			controller_editEmployee(listaEmpleados);
+            		}
+            	}
+            	else
+            	{
+            		puts("Cargue primero la lista");
+            		puts("Volviendo al menu....");
+            	}
             	break;
             case 5:
-           // 	int controller_removeEmployee(LinkedList* pArrayListEmployee);
+            	if(ll_isEmpty(listaEmpleados)==0)
+            	{
+            	controller_removeEmployee(listaEmpleados);
+            	}
+            	else
+            	{
+            		puts("Cargue la lista primero\nVolviendo al menu");
+
+            	}
             	break;
             case 6:
-            //	int controller_ListEmployee(LinkedList* pArrayListEmployee);
+            	if(ll_isEmpty(listaEmpleados)==0)
+            	{
+            	controller_ListEmployee(listaEmpleados);
+            	}
+            	else
+            	{
+            		puts("Cargue la lista primero\nVolviendo al menu");
+            	}
             	break;
             case 7:
-            //	int controller_sortEmployee(LinkedList* pArrayListEmployee);
+            	if(ll_isEmpty(listaEmpleados)==0)
+            	{
+            		if(controller_sortEmployee(listaEmpleados)==0)
+            		{
+            			puts("\t\tLISTA ORDENADA");
+            			controller_ListEmployee(listaEmpleados);
+            		}
+            	}
+            	else
+            	{
+            		puts("Ingrese una carga primero");
+            	}
             	break;
             case 8:
-            //	int controller_saveAsText(char* path , LinkedList* pArrayListEmployee);
+            	if(flagDeCarga==1 && ll_isEmpty(listaEmpleados)==0)
+            	{
+            	controller_saveAsText("data.csv" , listaEmpleados);
+            	}
+            	else
+            	{
+            		puts("No hay nada que guardar");
+            	}
             	break;
             case 9:
-            //	int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee);
+            	if(flagDeCarga==1 && ll_isEmpty(listaEmpleados))
+            	{
+            	controller_saveAsBinary("binario.bin" , listaEmpleados);
+            	}
+            	else
+            	{
+            		puts("NO hay nada q guardar");
+            	}
             	break;
             case 10:
             	puts("Adios.");
@@ -63,63 +134,6 @@ int main()
     }while(option != 10);
     return 0;
 }
-
-
-
-
-//funciones del tp 4
-/*
-static Node* getNode(LinkedList* this, int nodeInex)
-{
-	Node* nodoAuxiliar=NULL;
-	if(this!=NULL && nodeIndex >0 ll_len(this)> nodeIndex)
-	{
-		nodoAuxiliar=this->pFisrtNode; // estoy dando el index de la posicion cero, del likendList
-		for(index =1; index < )
-		{
-			nodoAuxiliar=nodoAuxiliar->pNextNode; //aca ahora tiene la direccion actual, y ahi sera remplazado al sig del campo que esta ahi. Osea recorre asi todo
-		}
-	}
-
-	return nodoAuxiliar;
-}
-
-
-
-
-static int addNode(likedList* this, int nodeIndex, void* pEklem)
-{
-	Node* nodoAuxiliar;
-	int returnAux=-1
-	Node* pNodo=(Node*)malloc
-
-	if(pNodo=NULL){
-		if(nodeIndex==0)
-		{
-			this->NextNode=nodoAuxiliar->fistNode;
-			this_zFistNode=nodoAuxilar;
-			this->size++;
-		}
-		else if(nodeIndex==this)
-		{
-
-		}
-		else
-		{
-			Node* nodeoAuxiliar=getNode();
-		}
-	}
-
-}
-
-
-
-
-
-*/
-
-
-
 
 
 

@@ -15,27 +15,38 @@ Employee* employee_new()
 	return (Employee*) malloc(sizeof(Employee));
 }
 
-Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajadasStr)
+Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajadasStr,char* sueldoStr)
 {
 	Employee* this = employee_new();
 	int idAux;
 	int horasTrabajadasAux;
+	int sueldoAux;
 	if(idStr!=NULL && nombreStr!=NULL && horasTrabajadasStr!=NULL)
 	{
 		idAux=atoi(idStr);
 		horasTrabajadasAux=atoi(horasTrabajadasStr);
-		if(!employee_setNombre(this, nombreStr) && !employee_setId(this, idAux) && !employee_setHorasTrabajadas(this, horasTrabajadasAux))
+		sueldoAux=atoi(sueldoStr);
+		if(!employee_setNombre(this, nombreStr) && !employee_setId(this, idAux) && !employee_setHorasTrabajadas(this, horasTrabajadasAux) && !employee_setSueldo(this, sueldoAux))
 		{
-			return this;
+			puts("Salio bien el newParametros");
 		}
+		else
+		{
 		employee_delete(this);
-		return NULL;
+		this=NULL;
+		}
 	}
+
+	return this;
 }
 
 void employee_delete(Employee* this)
 {
-	free(this);
+	if(this!=NULL)
+	{
+		free(this);
+	}
+
 }
 
 int employee_setId(Employee* this,int id)
@@ -69,7 +80,7 @@ int employee_getId(Employee* this,int* id)
 	if(this!=NULL && id>0)
 	{
 		deteccion=0;
-		id=this->id;
+		*id=this->id;
 	}
 	return deteccion;
 }
@@ -101,7 +112,7 @@ int employee_getNombre(Employee* this,char* nombre)
 int employee_setHorasTrabajadas(Employee* this,int horasTrabajadas)
 {
 	int deteccion=-1;
-	if(this!=NULL && horasTrabajadas>=0 && isValidHorasTrabajadas(horasTrabajadas))
+	if(this!=NULL && horasTrabajadas>=0)
 	{
 		deteccion=0;
 		this->horasTrabajadas=horasTrabajadas;
@@ -114,7 +125,7 @@ int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas)
 	if(this!=NULL && horasTrabajadas>=0)
 	{
 		deteccion=0;
-		horasTrabajadas=this->horasTrabajadas;
+		*horasTrabajadas=this->horasTrabajadas;
 	}
 	return deteccion;
 }
@@ -135,10 +146,13 @@ int employee_getSueldo(Employee* this,int* sueldo)
 	if(this!=NULL && sueldo>0)
 	{
 		deteccion=0;
-		sueldo=this->sueldo;
+		*sueldo=this->sueldo;
 	}
 	return deteccion;
 }
+
+
+
 
 
 
@@ -173,7 +187,7 @@ static int isValidNombre(char* nombre)
 static int isValidSueldo(int sueldo)
 {
 	int deteccion=-1;
-		if(sueldo!=NULL && sueldo>0)
+		if(sueldo>0)
 		{
 			deteccion=0;
 		}
@@ -184,7 +198,7 @@ static int isValidSueldo(int sueldo)
 static int isValidId(int id)
 {
 	int deteccion=-1;
-		if(id!=NULL && id>0)
+		if( id>=0)
 		{
 			deteccion=0;
 		}
@@ -193,35 +207,71 @@ static int isValidId(int id)
 }
 
 
-int employee_leerArchivo(Employee* this, int limite, char* pathArchivo, int* proximoId)
-{
-	int deteccion=-1;
-	FILE* fArchivo;
-	char auxiliarId[4096];
-	char auxilarNombre[4096];
-	char auxilarAltura[4096];
-	if(this!=NULL && limite>0 && pathArchivo!=NULL)
-	{
-		deteccion=0;
-		do
-		{
-			if(fscanf(fArchivo,"[^,],%[^,],%[^\n]\n",auxiliarId, auxilarNombre, auxilarAltura)==3)
-			{
-				if()
-				{
 
-				}
-			}
-		}while(!feof(fArchivo));
-		fclose(fArchivo);
+
+
+
+
+int OrdenarPorNombre(void* empleadoAnterior, void* empleadoPosterior)
+{
+	int ordenamiento=-4;
+	Employee* empleadoAux=(Employee*)empleadoAnterior;
+	Employee* empleadoAux2=(Employee*)empleadoPosterior;
+
+	if(empleadoAux!=NULL && empleadoAux2!=NULL)
+	{
+		ordenamiento=stricmp(empleadoAux2->nombre, empleadoAux2->nombre);
 	}
 
 
 
-
-
-
-
-
+	return ordenamiento;
 }
+
+int OrdenarPorSueldo(void* empleadoAnterior, void* empleadoPosterior)
+{
+	int retorno=0;
+	Employee* empleadoAux=(Employee*)empleadoAnterior;
+	Employee* empleadoAux2=(Employee*)empleadoPosterior;
+
+	if(empleadoAux->sueldo!=empleadoAux2->sueldo)
+	{
+		if(empleadoAux->sueldo>empleadoAux2->sueldo)
+		{
+			retorno=1;
+		}
+		else if(empleadoAux->sueldo<empleadoAux2->sueldo)
+		{
+			retorno=-1;
+		}
+	}
+
+
+
+	return retorno;
+}
+
+int OrdenarPorHora(void* empleadoAnterior, void* empleadoPosterior)
+{
+	int retorno=0;
+	Employee* empleadoAux=(Employee*)empleadoAnterior;
+	Employee* empleadoAux2=(Employee*)empleadoPosterior;
+
+	if(empleadoAux->horasTrabajadas!=empleadoAux2->horasTrabajadas)
+	{
+		if(empleadoAux->horasTrabajadas>empleadoAux2->horasTrabajadas)
+		{
+			retorno=1;
+		}
+		else if(empleadoAux->horasTrabajadas<empleadoAux2->horasTrabajadas)
+		{
+			retorno=-1;
+		}
+	}
+
+
+
+	return retorno;
+}
+
 
