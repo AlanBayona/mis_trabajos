@@ -29,9 +29,9 @@ int agregarSalon(eSalon list[], int len)
 	{
 		index=buscarSalonVacio(list, len);
 		if(index>=0){
-			if(pedir_texto(&salonAux.nombre, "Ingrese el nombre del salon:\n", "ERROR. Intente de nuevo", 2)==0)
+			if(pedir_texto(salonAux.nombre, "Ingrese el nombre del salon:\n", "ERROR. Intente de nuevo", 2)==0)
 			{
-				if(pedirDireccion(&salonAux.direccion, "Ingrese direccion del salon:\n", "ERROR B", 2)==0)
+				if(pedirDireccion(salonAux.direccion, "Ingrese direccion del salon:\n", "ERROR B", 2)==0)
 				{
 					if(pedirTipoInt(&salonAux.tipo, "\tIngrese tipo:\n1-Shopping\n2-Local\n", "ERROR C", 0, 3, 3)==0)
 					{
