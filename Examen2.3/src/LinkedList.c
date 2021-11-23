@@ -1,3 +1,11 @@
+/*
+ * LinkedList.c
+ *
+ *  Created on: 23 nov. 2021
+ *      Author: alanb
+ */
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

@@ -1,8 +1,16 @@
-#ifndef controller_H_INCLUDED
-#define controller_H_INCLUDED
+/*
+ * Controller.h
+ *
+ *  Created on: 23 nov. 2021
+ *      Author: alanb
+ */
+
+#ifndef CONTROLLER_H_
+#define CONTROLLER_H_
 
 
-#endif
+
+#endif /* CONTROLLER_H_ */
 
 
 int controller_loadFromText(char* path , LinkedList* pArrayListEmployee);

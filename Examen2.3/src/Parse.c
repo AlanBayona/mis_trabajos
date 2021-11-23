@@ -1,3 +1,11 @@
+/*
+ * Parse.c
+ *
+ *  Created on: 23 nov. 2021
+ *      Author: alanb
+ */
+
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -56,45 +64,3 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListArcade)
 
     return deteccion;
 }
-
-/** \brief Parsea los datos los datos de los empleados desde el archivo data.csv (modo binario).
- *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
- *
- */
-
-/*
-int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
-{
-	int deteccion=-1;
-
-	Employee* pEmpleadoAuxiliar;
-
-	puts("Ingreso a la funcion binary");
-	if(pArrayListEmployee!=NULL && pFile!=NULL)
-	{
-
-		do{
-			pEmpleadoAuxiliar=employee_new();
-			if(fread(pEmpleadoAuxiliar,sizeof(Employee),1,pFile)==1)
-			{
-				ll_add(pArrayListEmployee, pEmpleadoAuxiliar);
-				deteccion=0;
-			}
-			else
-			{
-				employee_delete(pEmpleadoAuxiliar);
-				break;
-			}
-
-
-
-
-		}while(feof(pFile)==0);
-		fclose(pFile);
-	}
-    return deteccion;
-}
-*/

@@ -1,10 +1,18 @@
+/*
+ * Controller.c
+ *
+ *  Created on: 23 nov. 2021
+ *      Author: alanb
+ */
+
+
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "Arcade.h"
 #include "LinkedList.h"
 #include "Inputs.h"
-#include "parser.h"
+#include "Parser.h"
 
 #define MONO 1 // y riel=riel
 #define ESTEREO 2
@@ -445,12 +453,4 @@ static int buscarPorId(LinkedList* this, int id)
 
 	return index;
 }
-
-
-
-//SORT        : ORDENAR
-//MAP         : Permite transformar los elementos de una lista
-//REDUCE      : Ejecuta una funcion rductora sobre cada elemento, devolviendo como unico resultado un
-//FILTER      :	Filtra todos los elementos que cumplan la condicion implementada por la funcion dada
-
 

@@ -1,6 +1,6 @@
 /*
  ============================================================================
- Name        : Examen_2.c
+ Name        : 2.c
  Author      : 
  Version     :
  Copyright   : Your copyright notice
