@@ -1,26 +1,18 @@
-/*
- * Controller.h
- *
- *  Created on: 23 nov. 2021
- *      Author: alanb
- */
-
-#ifndef CONTROLLER_H_
-#define CONTROLLER_H_
+#ifndef controller_H_INCLUDED
+#define controller_H_INCLUDED
 
 
+#endif
 
-#endif /* CONTROLLER_H_ */
 
-
-int controller_loadFromText(char* path , LinkedList* pArrayListEmployee);
-int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee);
-int controller_addEmployee(LinkedList* pArrayListEmployee);
-int controller_editEmployee(LinkedList* pArrayListEmployee);
-int controller_removeEmployee(LinkedList* pArrayListEmployee);
-int controller_ListEmployee(LinkedList* pArrayListEmployee);
-int controller_sortEmployee(LinkedList* pArrayListEmployee);
-int controller_saveAsText(char* path , LinkedList* pArrayListEmployee);
-int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee);
+int controller_loadFromText(char* path , LinkedList* pArrayListArcade);
+//int controller_loadFromBinary(char* path , LinkedList* pArrayListArcade);
+int controller_addArcade(LinkedList* pArrayListArcade);
+int controller_editArcade(LinkedList* pArrayListArcade);
+int controller_removeArcade(LinkedList* pArrayListArcade);
+int controller_removeArcade(LinkedList* pArrayListArcade);
+int controller_sortArcade(LinkedList* pArrayListArcade);
+int controller_saveAsText(char* path , LinkedList* pArrayListArcade);
+//int controller_saveAsBinary(char* path , LinkedList* pArrayListArcade);
 
 

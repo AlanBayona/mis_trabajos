@@ -8,14 +8,16 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 #include "Arcade.h"
-#include "LinkedList.h"
 #include "Inputs.h"
-#include "Parser.h"
+#include "Parse.h"
+#include "LinkedList.h"
 
 #define MONO 1 // y riel=riel
 #define ESTEREO 2
+
+
 
 static int buscarPorId(LinkedList* this, int id);
 
@@ -70,6 +72,7 @@ int controller_loadFromText(char* path , LinkedList* pArrayListArcade)
  * \return int
  *
  */
+/*
 int controller_loadFromBinary(char* path,LinkedList* pArrayListArcade)
 {
 	int deteccion=-1;
@@ -80,7 +83,7 @@ int controller_loadFromBinary(char* path,LinkedList* pArrayListArcade)
 	if(pArrayListArcade!=NULL && path!=NULL && fpArchivo!=NULL)
 	{
 
-		parser_EmployeeFromBinary(fpArchivo, pArrayListArcade);
+		parser_ArcadeFromBinary(fpArchivo, pArrayListArcade);
 		deteccion=0;
 	}
 	else
@@ -91,10 +94,9 @@ int controller_loadFromBinary(char* path,LinkedList* pArrayListArcade)
 
 
 
-
-
     return deteccion;
 }
+*/
 
 /** \brief Alta de empleados
  *
@@ -103,6 +105,7 @@ int controller_loadFromBinary(char* path,LinkedList* pArrayListArcade)
  * \return int
  *
  */
+
 int controller_addArcade(LinkedList* pArrayListArcade) //falta actualizar
 {
 	int deteccion=-1;
@@ -129,12 +132,12 @@ int controller_addArcade(LinkedList* pArrayListArcade) //falta actualizar
 							if(pedirTipoInt(&sonido, "1)Mono\n2)Estereo\n", "Error", MONO, ESTEREO, 2)==0)
 							{
 								idAux=crearId();
-								if(arcade_setSonido(pArrayListArcade, sonido)==0 &&
-										arcade_setId(pArrayListArcade, idAux)==0 &&
-										arcade_setCantDeFichas(pArrayListArcade, cantFichas)==0 &&
-										arcade_setCantDeJugadores(pArrayListArcade, cantJugadores)==0 &&
-										arcade_setJuego(pArrayListArcade, juego)==0 &&
-										arcade_setNacionalidad(pArrayListArcade, nacionalidad)==0)
+								if(arcade_setSonido(pArcade, sonido)==0 &&
+										arcade_setId(pArcade, idAux)==0 &&
+										arcade_setCantDeFichas(pArcade, cantFichas)==0 &&
+										arcade_setCantDeJugadores(pArcade, cantJugadores)==0 &&
+										arcade_setJuego(pArcade, juego)==0 &&
+										arcade_setNacionalidad(pArcade, nacionalidad)==0)
 								{
 									deteccion=ll_add(pArrayListArcade, pArcade);
 								}
@@ -162,16 +165,12 @@ int controller_addArcade(LinkedList* pArrayListArcade) //falta actualizar
  * \return int
  *
  */
-int controller_editEmployee(LinkedList* pArrayListArcade) //incompleto
+
+int controller_editArcade(LinkedList* pArrayListArcade) //incompleto
 {
 	int deteccion=-1;
-	int idAux;
-	char nombreSalon[128];
 	char juego[128];
-	char nacionalidad[128];
 	int cantJugadores;
-	int cantFichas;
-	int sonido;
 	int opcion;
 	int idABuscar;
 	int index;
@@ -198,7 +197,7 @@ int controller_editEmployee(LinkedList* pArrayListArcade) //incompleto
 								case 1:
 									if(pedirDireccion(juego, "Ingrese el juego nuevo", "Error", 2)==0)
 									{
-										if(arcade_setJuego(pArrayListArcade, juego)==0)
+										if(arcade_setJuego(arcadeAux, juego)==0)
 										{
 											puts("Nombre actualizado");
 										}
@@ -208,7 +207,7 @@ int controller_editEmployee(LinkedList* pArrayListArcade) //incompleto
 								case 2:
 									if(pedirTipoInt(&cantJugadores, "Ingrese la nueva cantidad de jugadores\n", "ERROR\n", 1, 6,1)==0)
 									{
-										if(arcade_setCantDeJugadores(pArrayListArcade, cantJugadores)==0)
+										if(arcade_setCantDeJugadores(arcadeAux, cantJugadores)==0)
 										{
 											puts("Sueldo actualizado");
 										}
@@ -240,6 +239,7 @@ int controller_editEmployee(LinkedList* pArrayListArcade) //incompleto
  * \return int
  *
  */
+
 int controller_removeArcade(LinkedList* pArrayListArcade) //
 {
 	int deteccion=-1;
@@ -256,10 +256,9 @@ int controller_removeArcade(LinkedList* pArrayListArcade) //
 					arcadeAux=ll_pop(pArrayListArcade, indexABorrar);
 					if(arcadeAux!=NULL)
 					{
-						if(arcade_delete(arcadeAux)==0)
-						{
+						arcade_delete(arcadeAux);
 							deteccion=0;
-						}
+
 					}
 				}
 			}
@@ -276,6 +275,7 @@ int controller_removeArcade(LinkedList* pArrayListArcade) //
  * \return int
  *
  */
+
 int controller_ListArcade(LinkedList* pArrayListArcade) //
 {
 	int deteccion;
@@ -293,13 +293,13 @@ int controller_ListArcade(LinkedList* pArrayListArcade) //
 		for(int i=0; i<=ll_len(pArrayListArcade); i++)
 		{
 			pArcadeAux=ll_get(pArrayListArcade,i);
-			if(arcade_getId(pArcadeAux, idAux)==0
-					&& arcade_getCantDeFichas(pArcadeAux, cantFichas)==0
-					&& arcade_getCantDeJugadores(pArcadeAux, cantJugadores)==0
-					&& arcade_getJuego(pArcadeAux, juego)==0
+			if(arcade_getId(pArcadeAux, &idAux)==0
+					&& arcade_getCantDeFichas(pArcadeAux, &cantFichas)==0
+					&& arcade_getCantDeJugadores(pArcadeAux, &cantJugadores)==0
+					&& arcade_getJuego(pArcadeAux,juego)==0
 					&& arcade_getNacionalidad(pArcadeAux, nacionalidad)==0
 					&& arcade_getNombreSalon(pArcadeAux, nombreSalon)==0
-					&& arcade_getSonido(pArcadeAux, sonido)==0)
+					&& arcade_getSonido(pArcadeAux, &sonido)==0)
 			{
 				puts("\n\tLISTA DE EMPLEADOS:");
 				if(sonido==1)
@@ -318,7 +318,7 @@ int controller_ListArcade(LinkedList* pArrayListArcade) //
 	else
 	{
 		puts("Salio mal el controllearList");
-		employee_delete(pArcadeAux);
+		arcade_delete(pArcadeAux);
 	}
 
 
@@ -334,6 +334,7 @@ int controller_ListArcade(LinkedList* pArrayListArcade) //
  * \return int
  *
  */
+
 int controller_sortArcade(LinkedList* pArrayListArcade) //
 {
 	int deteccion=-1;
@@ -361,18 +362,20 @@ int controller_sortArcade(LinkedList* pArrayListArcade) //
  * \return int
  *
  */
+
 int controller_saveAsText(char* path , LinkedList* pArrayListArcade)
 {
 	FILE* pArchivoTexto;
 	int deteccion=-1;
 	int idAux;
-	char nombreSalon[128];
-	char juego[128];
-	char nacionalidad[128];
+	char nombreSalon[65];
+	char juego[65];
+	char nacionalidad[65];
 	int cantJugadores;
 	int cantFichas;
 	int sonido;
-	Arcade* empleadoAux;
+	char sonidoStr[65];
+	Arcade* aux;
 
 	pArchivoTexto=fopen(path, "w");
 
@@ -382,12 +385,26 @@ int controller_saveAsText(char* path , LinkedList* pArrayListArcade)
 		fprintf(pArchivoTexto, "idAux,nombreAux,horasAux,sueldoAux\n");
 		for(int i=0; i<ll_len(pArrayListArcade);i++)
 		{
-			empleadoAux=(Arcade*)ll_get(pArrayListArcade, i);
-			employee_getId(empleadoAux, &idAux);
-			employee_getNombre(empleadoAux, nombreAux);
-			employee_getHorasTrabajadas(empleadoAux, &horasAux);
-			employee_getSueldo(empleadoAux, &sueldoAux);
-			fprintf(pArchivoTexto,"%d,%s,%d,%d\n", idAux,nombreAux,horasAux,sueldoAux);
+			aux=(Arcade*)ll_get(pArrayListArcade, i);
+			if(aux!=NULL)
+			{
+				arcade_getId(aux, &idAux);
+				arcade_getCantDeFichas(aux, &cantFichas);
+				arcade_getCantDeJugadores(aux, &cantJugadores);
+				arcade_getSonido(aux, &sonido);
+				arcade_getNacionalidad(aux, nacionalidad);
+				arcade_getNombreSalon(aux, nombreSalon);
+				arcade_getJuego(aux, juego);
+				if(sonido==1)
+				{
+					strcpy(sonidoStr, "MONO");
+				}
+				else if(sonido==2)
+				{
+					strcpy(sonidoStr, "STEREO");
+				}
+			}
+			fprintf(pArchivoTexto,"%d,%s,%s,%d,%d,%s,%s\n", idAux,nacionalidad,sonidoStr,cantJugadores,cantFichas,nombreSalon,juego);
 		}
 		deteccion=0;
 		printf("\nSalio bien el guardado\n");

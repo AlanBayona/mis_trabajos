@@ -15,7 +15,7 @@
 #include "Arcade.h"
 #include "Inputs.h"
 #include "Controller.h"
-#include "Parser.h"
+#include "Parse.h"
 #include "LinkedList.h"
 
 
@@ -56,6 +56,13 @@ int main()
 						puts("\nVolviendo al menu...");
 					break;
 				case 3:
+					if(ll_isEmpty(listaDeArcades)==0)
+					{
+						if(controller_editArcade(listaDeArcades)==0)
+						{
+
+						}
+					}
 					break;
 				case 4:
 					if(ll_isEmpty(listaDeArcades)==0)
@@ -64,6 +71,12 @@ int main()
 					}
 					break;
 				case 5:
+					if(ll_isEmpty(listaDeArcades)==0)
+					{
+						controller_sortArcade(listaDeArcades);
+						controller_ListArcade(listaDeArcades);
+
+					}
 					break;
 				case 6:
 					break;

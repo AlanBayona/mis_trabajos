@@ -8,7 +8,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 #include "Arcade.h"
 #include "LinkedList.h"
 #include "Inputs.h"
@@ -20,7 +20,7 @@
  * \return int
  *
  */
-int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListArcade)
+int parser_ArcadeFromText(FILE* pFile , LinkedList* pArrayListArcade)
 {
 	Arcade* arcadeAux;// nunca habia usado tantas veces la palabr Aux jeje
 	int deteccion=-1;
