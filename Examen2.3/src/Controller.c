@@ -12,7 +12,7 @@
 #include "Arcade.h"
 #include "Inputs.h"
 #include "Parse.h"
-#include "LinkedList.h"
+
 
 #define MONO 1 // y riel=riel
 #define ESTEREO 2
