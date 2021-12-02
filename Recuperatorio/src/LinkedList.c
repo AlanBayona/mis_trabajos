@@ -605,7 +605,7 @@ LinkedList* ll_filter(LinkedList* this, int(*pFunc)(void*))
 {
 	int criterio;
 	void* pAux;
-	LinkedList* listaAFiltrar;
+	LinkedList* listaAFiltrar=NULL;
 
 	if(this!=NULL && pFunc!=NULL)
 	{
@@ -643,7 +643,7 @@ int ll_map(LinkedList* this, int (*pFunc)(void*))
 
 	if(this!=NULL && pFunc!=NULL)
 	{
-		deteccion=0;
+
 		for(int i=0; i<ll_len(this); i++)
 		{
 			pElementAux=ll_get(this,i);
@@ -653,6 +653,7 @@ int ll_map(LinkedList* this, int (*pFunc)(void*))
 				pFunc(pElementAux);
 			}
 		}
+		deteccion=0;
 	}
 
 

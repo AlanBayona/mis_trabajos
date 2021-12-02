@@ -19,6 +19,10 @@
 #define SALAMANDRA 5
 #define PENGUIN_BOOKS 6
 
+
+#define VEINTE_PORCIENTO 20
+#define DIEZ_PORCIENTO 10
+
 //funciones normales
 eLibro* libro_new()
 {
@@ -230,18 +234,70 @@ int libro_getEditorialId(eLibro* this,int* editorialId)
 
 
 
-int OrdenarPorNombre(void* arcadeAnterior, void* arcadePosterior)
+int OrdenarPorNombre(void* libroAnterior, void* libroPosterior)
 {
 	int ordenamiento=-4;
-	eLibro* empleadoAux=(eLibro*)arcadeAnterior;
-	eLibro* empleadoAux2=(eLibro*)arcadePosterior;
+	eLibro* libroAux=(eLibro*)libroAnterior;
+	eLibro* libroAux2=(eLibro*)libroPosterior;
 
-	if(empleadoAux!=NULL && empleadoAux2!=NULL)
+	if(libroAux!=NULL && libroAux2!=NULL)
 	{
-		ordenamiento=stricmp(empleadoAux2->autor, empleadoAux->autor);
+		ordenamiento=stricmp(libroAux2->autor, libroAux->autor);
 	}
 
 
 
 	return ordenamiento;
 }
+
+
+
+/**
+ * \brief Recibe un puntero a una entidad y con el reliza un descuento que ya esta preestablecido
+ * \param void* un puntero de tipo void
+ * \return int deteccion
+ */
+
+int hacerDescuento(void* libroAMapear)
+{
+	int deteccion=-1;
+	int editorialAux;
+	int precioADescontar;
+	int precioConDescuento;
+	eLibro* libroAux=(eLibro*)libroAMapear;
+
+	if(libroAux!=NULL)
+	{
+		if(libro_getEditorialId(libroAux, editorialAux)==0 && libro_getPrecio(libroAux, precioADescontar)==0)
+		{
+			if(editorialAux==PLANETA && precioADescontar>=300)
+			{
+				deteccion=0;
+				if(realizarDescuento(&precioConDescuento, precioADescontar, VEINTE_PORCIENTO)==0)
+				{
+					deteccion=1;
+				}
+
+			}
+			else if(editorialAux==SIGLO_XXI_EDITORES && precioADescontar<=200)
+			{
+				deteccion=0;
+				if(realizarDescuento(&precioConDescuento, precioADescontar, DIEZ_PORCIENTO)==0)
+				{
+					deteccion=-1;
+				}
+			}
+
+			if(deteccion==1)
+			{
+				libro_setPrecio(libroAux, precioConDescuento);
+			}
+		}
+	}
+
+
+	return deteccion;
+}
+
+
+

@@ -21,32 +21,54 @@ int main(void) {
 	int opcion;
 	LinkedList* pListaDeLibros=ll_newLinkedList();
 
-	if(pedirTipoInt(&opcion, "", "Error\n", 1, 8, 2)==0)
+
+	do
 	{
-		do
+
+		mostrarMenu();
+		if(pedirTipoInt(&opcion, "", "Error\n", 1, 8, 2)==0)
 		{
+
 			switch(opcion)
 			{
 				case 1:
+					if(ll_isEmpty(pListaDeLibros)==1)
+					{
+						controlador_CargarLista("Datos_Recu_2_Dic_2021_TN.csv", pListaDeLibros);
+					}
 					break;
 				case 2:
+					if(ll_isEmpty(pListaDeLibros)==0)
+					{
+						controlador_OrdenarPorAutor(pListaDeLibros);
+					}
 					break;
 				case 3:
+					if(ll_isEmpty(pListaDeLibros)==0)
+					{
+						controlador_MostrarListaDeLibros(pListaDeLibros);
+
+					}
 					break;
 				case 4:
+					if(ll_isEmpty(pListaDeLibros)==0)
+					{
+						controlador_mapearLista(pListaDeLibros);
+					}
 					break;
 				case 5:
-					break;
-				case 6:
-					break;
-				case 7:
+					if(ll_isEmpty(pListaDeLibros)==0)
+					{
+						if(pedirTipoInt(&opcion, "\tSub-Menu\n1. ", mensajeError, minimo, maximo, reintentos))
+						{
+
+						}
+					}
 					break;
 			}
+		}
 
+	}while(opcion!=8);
 
-
-
-		}while(opcion!=8);
-	}
 	return EXIT_SUCCESS;
 }
