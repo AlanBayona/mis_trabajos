@@ -580,8 +580,10 @@ int ll_sort(LinkedList* this, int (*pFunc)(void*, void*), int orden)
 
 	if(this!=NULL && pFunc !=NULL && (orden==2 || orden==1))
 	{
+		puts("PAso el NUll");
 		while(disorderedState)
 		{
+			puts("Dentro del while");
 			disorderedState=0;
 			for(i=0; i<ll_len(this)-1;i++)
 			{
@@ -591,6 +593,7 @@ int ll_sort(LinkedList* this, int (*pFunc)(void*, void*), int orden)
 
 				if(orden==CRECIENTE)
 				{
+					puts("1");
 					if(criterio==MAYOR_UNO)
 					{
 					ll_set(this, i, pElement2);

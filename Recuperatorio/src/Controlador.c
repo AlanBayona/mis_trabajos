@@ -13,6 +13,9 @@
 #include "Inputs.h"
 #include "LinkedList.h"
 #include "Calculos.h"
+#include "Libro.h"
+#include "Controlador.h"
+#include "Parse.h"
 
 
 
@@ -26,15 +29,20 @@
 int controlador_CargarLista(char* nomDelArchivo, LinkedList* pListaDeLibros)
 {
 	int deteccion=-1;
-
-	FILE* pArchivo;
+	puts("Antes de toda comprobacion");
+	FILE* pArchivoAux;
 
 	if(pListaDeLibros!=NULL && nomDelArchivo!=NULL)
 	{
-		if((pArchivo=open(nomDelArchivo, "r"))!=NULL)
+		puts("Paso el primer NULL");
+		pArchivoAux=fopen(nomDelArchivo, "r");
+		if(pArchivoAux==NULL){puts("Esta vacia webon");}
+		if(pArchivoAux!=NULL)
 		{
-			if(parser_bookFromText(nomDelArchivo, pListaDeLibros)==0)
+			puts("Paso el NULL");
+			if(parser_bookFromText(pArchivoAux, pListaDeLibros)==0)
 			{
+				puts("paso el parse");
 				deteccion=0;
 			}
 			else
@@ -58,10 +66,12 @@ int controlador_CargarLista(char* nomDelArchivo, LinkedList* pListaDeLibros)
 int controlador_OrdenarPorAutor(LinkedList* pListaDeLibros)
 {
 	int deteccion=-1;
-
+	puts("Antes del primer NULL");
 	if(pListaDeLibros!=NULL)
 	{
+		puts("Paso");
 		deteccion=ll_sort(pListaDeLibros, OrdenarPorAutor, 1);
+		printf("\nDeteccion: %d\n", deteccion);
 		if(deteccion!=0)
 		{
 			deteccion=-1;
@@ -77,8 +87,7 @@ int controlador_OrdenarPorAutor(LinkedList* pListaDeLibros)
 
 int controlador_MostrarListaDeLibros(LinkedList* pListaDeLibros)
 {
-	int deteccion;
-	deteccion=-1;
+	int deteccion=-1;
 	eLibro* pLibroAux=libro_new();
 	int idAux;
 	char tituloAux[128];
@@ -160,17 +169,68 @@ int controlador_mapearLista(LinkedList* pListaDeLibros)
 
 
 
-int controlador_filtrarListaDeLibros(LinkedList* pListaDelibros)
+
+
+int controlador_guardarLista(char* nomDelArchivo , LinkedList* pListaDeLibros)
 {
+	FILE* pArchivo;
 	int deteccion=-1;
-	if(pListaDelibros!=NULL)
+	int idAux;
+	char tituloAux[128];
+	char autorAux[128];
+	int precioAux;
+	int editorialAux;
+	char editorialTexto[128];
+	eLibro* libroAux;
+
+	pArchivo=fopen(nomDelArchivo, "w");
+
+	if(pListaDeLibros!=NULL && nomDelArchivo!=NULL && pArchivo!=NULL)
 	{
-		ll_filter(pListaDelibros, libro_filtrarPorAutor);
+		rewind(pArchivo);
+		fprintf(pArchivo, "idAux,tituloAux,autorAux,precioAux,aditorialAux\n");
+		for(int i=0; i<ll_len(pListaDeLibros);i++)
+		{
+			libroAux=(eLibro*)ll_get(pListaDeLibros, i);
+			libro_getId(libroAux, &idAux);
+			libro_getTitulo(libroAux, tituloAux);
+			libro_getAutor(libroAux, autorAux);
+			libro_getPrecio(libroAux, precioAux);
+			libro_getEditorialId(libroAux, editorialAux);
+
+				switch(editorialAux)
+							{
+								case 1:
+									strcpy(editorialTexto, "Planeta");
+									break;
+								case 2:
+									strcpy(editorialTexto, "SIGLO XXI EDITORES");
+									break;
+								case 3:
+									strcpy(editorialTexto, "Pearson");
+									break;
+								case 4:
+									strcpy(editorialTexto, "Minotauro");
+									break;
+								case 5:
+									strcpy(editorialTexto, "SALAMANDRA");
+									break;
+								case 6:
+									strcpy(editorialTexto, "PENGUIN BOOKS");
+									break;
+
+							}
+
+
+			fprintf(pArchivo,"%d,%s,%s,%d,%s\n", idAux,tituloAux,autorAux,precioAux, editorialTexto);
+		}
+		deteccion=0;
+		printf("\nSalio bien el guardado\n");
 	}
 
+	fclose(pArchivo);
 
-
-	return deteccion;
+    return deteccion;
 }
 
 

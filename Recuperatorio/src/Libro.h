@@ -34,8 +34,8 @@ int libro_getPrecio(eLibro* this,int* precio);
 int libro_setEditorialId(eLibro* this,int editorilaId);
 int libro_getEditorialId(eLibro* this,int* editorialId);
 
-int arcade_setAutor(eLibro* this,char* autor);
-int arcade_getAutor(eLibro* this,char* autor);
+int libro_setAutor(eLibro* this,char* autor);
+int libro_getAutor(eLibro* this,char* autor);
 
 
 
@@ -45,5 +45,6 @@ int arcade_getAutor(eLibro* this,char* autor);
 int OrdenarPorNombre(void* arcadeAnterior, void* arcadePosterior);
 int OrdenarPorAutor(void* libroAnterior, void* libroPosterior);
 int hacerDescuento(void* libroAMapear);
+int libro_filtrarPorEditorialMinotauro(void* pLibro);
 
 #endif /* LIBRO_H_ */

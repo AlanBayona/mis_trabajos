@@ -47,7 +47,7 @@ eLibro* libro_newParametros(char* idStr,char* tituloStr,char* autorStr,char* pre
 	{
 		idAux=atoi(idStr);
 		precioAux=atoi(precioStr);
-		if(strcmp(editorialStr, "PLANETA")==0)
+		if(strcmp(editorialStr, "Planeta")==0)
 		{
 			editorialAux=PLANETA;
 		}
@@ -55,11 +55,11 @@ eLibro* libro_newParametros(char* idStr,char* tituloStr,char* autorStr,char* pre
 		{
 			editorialAux=SIGLO_XXI_EDITORES;
 		}
-		else if(strcmp(editorialStr, "PEARSEON")==0)
+		else if(strcmp(editorialStr, "Pearson")==0)
 		{
 			editorialAux=PEARSEON;
 		}
-		else if(strcmp(editorialStr, "MINUTAURO")==0)
+		else if(strcmp(editorialStr, "Minotauro")==0)
 		{
 				editorialAux=MINOTAURO;
 		}
@@ -332,3 +332,29 @@ int OrdenarPorAutor(void* libroAnterior, void* libroPosterior)
 	return ordenamiento;
 }
 
+
+
+/**
+ * \brief Esta funcion recibe un elemento que vereficara si tiene como campo a la editorial Minotauro
+ * \param void* pLibro un puntero del tipo void
+ * \return int deteccion devuelve un -1 si no encontro o devuelve un cero(0) si es que correcto la comparacion
+ */
+
+int libro_filtrarPorEditorialMinotauro(void* pLibro)
+{
+	int deteccion=-1;
+	int editorialAux;
+	eLibro* libroAFiltrar=(eLibro*)pLibro;
+	if(libroAFiltrar!=NULL && libro_getEditorialId(libroAFiltrar, editorialAux)==0)
+	{
+		if(editorialAux!=MINOTAURO)
+		{
+			deteccion=0;
+		}
+	}
+
+
+
+
+	return deteccion;
+}

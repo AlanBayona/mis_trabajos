@@ -9,7 +9,6 @@
 #define PARSER_H_
 
 
-int parser_ArcadeFromText(FILE* pFile ,LinkedList* pArrayListArcade);
-
+int parser_bookFromText(FILE* pFile , LinkedList* pArrayListLibro);
 
 #endif /* PARSER_H_ */

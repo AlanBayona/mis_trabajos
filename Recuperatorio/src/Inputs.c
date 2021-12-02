@@ -64,7 +64,7 @@ static int validarChar(char* pLetra)
 	int deteccion;
 	deteccion=-1;
 
-	if(pLetra!=NULL && (pLetra>='A' && pLetra<='Z') && (pLetra>='a' && pLetra<='z'))
+	if(pLetra!=NULL && ((pLetra>='A' && pLetra<='Z') || (pLetra>='a' && pLetra<='z')))
 	{
 		deteccion=0;
 	}
