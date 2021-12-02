@@ -11,6 +11,10 @@
 #include <string.h>
 #include "LinkedList.h"
 
+#define DECRECIENTE 1
+#define CRECIENTE 2
+#define MAYOR_UNO 1
+#define MAYOR_DOS -1
 
 static Node* getNode(LinkedList* this, int nodeIndex);
 static int addNode(LinkedList* this, int nodeIndex,void* pElement);
@@ -563,7 +567,7 @@ LinkedList* ll_clone(LinkedList* this)
  * \return int Retorna  (-1) Error: si el puntero a la listas es NULL
                                 ( 0) Si ok
  */
-int ll_sort(LinkedList* this, int (*pFunc)(void*, void*), int order)
+int ll_sort(LinkedList* this, int (*pFunc)(void*, void*), int orden)
 {
 	int deteccion=-1;
 	int i;
@@ -574,7 +578,7 @@ int ll_sort(LinkedList* this, int (*pFunc)(void*, void*), int order)
 
 
 
-	if(this!=NULL && pFunc !=NULL && (order==0 || order==1))
+	if(this!=NULL && pFunc !=NULL && (orden==2 || orden==1))
 	{
 		while(disorderedState)
 		{
@@ -585,11 +589,36 @@ int ll_sort(LinkedList* this, int (*pFunc)(void*, void*), int order)
 				pElement2=ll_get(this, i+1);
 				criterio=pFunc(pElement, pElement2);
 
-				if((order==1 && criterio==1) || (order==0 && criterio==-1))
+				if(orden==CRECIENTE)
 				{
+					if(criterio==MAYOR_UNO)
+					{
 					ll_set(this, i, pElement2);
 					ll_set(this, i+1, pElement);
 					disorderedState=1;
+					}
+					else if(criterio==MAYOR_DOS)
+					{
+						ll_set(this, i, pElement);
+						ll_set(this, i+1, pElement2);
+						disorderedState=1;
+					}
+				}
+				else if(orden==DECRECIENTE )
+				{
+					if(criterio==MAYOR_UNO)
+					{
+						ll_set(this,i,pElement);
+						ll_set(this,i+1, pElement2);
+						disorderedState=1;
+					}
+					else if(criterio==MAYOR_DOS)
+					{
+						ll_set(this, i, pElement2);
+						ll_set(this, i+1, pElement);
+						disorderedState=1;
+					}
+
 				}
 			}
 			deteccion=0;

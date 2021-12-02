@@ -43,5 +43,7 @@ int arcade_getAutor(eLibro* this,char* autor);
 
 
 int OrdenarPorNombre(void* arcadeAnterior, void* arcadePosterior);
+int OrdenarPorAutor(void* libroAnterior, void* libroPosterior);
+int hacerDescuento(void* libroAMapear);
 
 #endif /* LIBRO_H_ */

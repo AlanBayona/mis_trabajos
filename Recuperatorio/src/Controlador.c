@@ -165,7 +165,7 @@ int controlador_filtrarListaDeLibros(LinkedList* pListaDelibros)
 	int deteccion=-1;
 	if(pListaDelibros!=NULL)
 	{
-
+		ll_filter(pListaDelibros, libro_filtrarPorAutor);
 	}
 
 

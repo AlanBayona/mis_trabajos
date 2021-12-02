@@ -23,6 +23,9 @@
 #define VEINTE_PORCIENTO 20
 #define DIEZ_PORCIENTO 10
 
+#define MAYOR_MENOR 1
+#define MENOR_MAYOR -1
+
 //funciones normales
 eLibro* libro_new()
 {
@@ -234,7 +237,7 @@ int libro_getEditorialId(eLibro* this,int* editorialId)
 
 
 
-int OrdenarPorNombre(void* libroAnterior, void* libroPosterior)
+/*int OrdenarPorNombre(void* libroAnterior, void* libroPosterior)
 {
 	int ordenamiento=-4;
 	eLibro* libroAux=(eLibro*)libroAnterior;
@@ -248,7 +251,7 @@ int OrdenarPorNombre(void* libroAnterior, void* libroPosterior)
 
 
 	return ordenamiento;
-}
+}*/
 
 
 
@@ -300,4 +303,32 @@ int hacerDescuento(void* libroAMapear)
 }
 
 
+
+int OrdenarPorAutor(void* libroAnterior, void* libroPosterior)
+{
+	int ordenamiento=0;
+	int autorUno;
+	int autorDos;
+	eLibro* libroAux=(eLibro*)libroAnterior;
+	eLibro* libroAux2=(eLibro*)libroPosterior;
+
+	if(libroAux!=NULL && libroAux2!=NULL)
+	{
+		if(libro_getAutor(libroAnterior, autorUno)==0 && libro_getAutor(libroPosterior, autorDos)==0)
+		{
+			if(autorUno>autorDos)
+			{
+				ordenamiento=1;
+			}
+			else if(autorDos>autorUno)
+			{
+				ordenamiento=-1;
+			}
+		}
+	}
+
+
+
+	return ordenamiento;
+}
 
