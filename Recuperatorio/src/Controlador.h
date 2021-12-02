@@ -12,7 +12,6 @@
 int controlador_CargarLista(char* nomDelArchivo, LinkedList* pListaDeLibros);
 int controlador_OrdenarPorAutor(LinkedList* pListaDeLibros);
 int controlador_MostrarListaDeLibros(LinkedList* pListaDeLibros);
-int controlador_mapearLista(LinkedList* pListaDeLibros);
 int controlador_filtrarListaDeLibros(LinkedList* pListaDelibros);
 int controlador_guardarLista(char* nomDelArchivo , LinkedList* pListaDeLibros);
 

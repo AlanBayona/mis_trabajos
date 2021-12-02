@@ -11,6 +11,7 @@
 #include <stdlib.h>
 
 #include "Libro.h"
+#include "Calculos.h"
 
 #define PLANETA 1
 #define SIGLO_XXI_EDITORES 2

@@ -623,6 +623,7 @@ int ll_sort(LinkedList* this, int (*pFunc)(void*, void*), int orden)
 					}
 
 				}
+				printf("Verdad: %d", disorderedState);
 			}
 			deteccion=0;
 		}

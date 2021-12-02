@@ -153,22 +153,6 @@ int controlador_MostrarListaDeLibros(LinkedList* pListaDeLibros)
 
 
 
-int controlador_mapearLista(LinkedList* pListaDeLibros)
-{
-	int deteccion=-1;
-
-	if(pListaDeLibros!=NULL)
-	{
-		deteccion=ll_map(pListaDeLibros, hacerDescuento);
-	}
-
-
-	return deteccion;
-}
-
-
-
-
 
 
 int controlador_guardarLista(char* nomDelArchivo , LinkedList* pListaDeLibros)

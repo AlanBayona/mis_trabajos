@@ -67,7 +67,10 @@ int main(void) {
 				case 4:
 					if(ll_isEmpty(pListaDeLibros)==0)
 					{
-						controlador_mapearLista(pListaDeLibros);
+						if(ll_map(pListaDeLibros, hacerDescuento)==0)
+						{
+							puts("Map con exito");
+						}
 					}
 					break;
 				case 5:
