@@ -76,7 +76,7 @@ int main(void) {
 				case 5:
 					if(ll_isEmpty(pListaDeLibros)==0)
 					{
-						controlador_guardarLista("mapeado.csv", pListaDeLibros);
+						controlador_guardarLista("src/mapeado.csv", pListaDeLibros);
 					}
 					break;
 				case 6:

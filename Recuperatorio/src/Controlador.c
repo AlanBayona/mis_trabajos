@@ -70,7 +70,7 @@ int controlador_OrdenarPorAutor(LinkedList* pListaDeLibros)
 	if(pListaDeLibros!=NULL)
 	{
 		puts("Paso");
-		deteccion=ll_sort(pListaDeLibros, OrdenarPorAutor, 1);
+		deteccion=ll_sort(pListaDeLibros, OrdenarPorAutor, 0);
 		printf("\nDeteccion: %d\n", deteccion);
 		if(deteccion!=0)
 		{
@@ -96,6 +96,7 @@ int controlador_MostrarListaDeLibros(LinkedList* pListaDeLibros)
 	int editorialAux;
 	if(pListaDeLibros!=NULL && pLibroAux!=NULL)
 	{
+		puts("\n\tLISTA DE EMPLEADOS:");
 		for(int i=0; i<=ll_len(pListaDeLibros); i++)
 		{
 			pLibroAux=ll_get(pListaDeLibros,i);
@@ -105,7 +106,7 @@ int controlador_MostrarListaDeLibros(LinkedList* pListaDeLibros)
 					&& libro_getPrecio(pLibroAux,&precioAux)==0
 					&& libro_getTitulo(pLibroAux, tituloAux)==0)
 			{
-				puts("\n\tLISTA DE EMPLEADOS:");
+
 				switch(editorialAux)
 				{
 					case 1:
@@ -179,8 +180,8 @@ int controlador_guardarLista(char* nomDelArchivo , LinkedList* pListaDeLibros)
 			libro_getId(libroAux, &idAux);
 			libro_getTitulo(libroAux, tituloAux);
 			libro_getAutor(libroAux, autorAux);
-			libro_getPrecio(libroAux, precioAux);
-			libro_getEditorialId(libroAux, editorialAux);
+			libro_getPrecio(libroAux, &precioAux);
+			libro_getEditorialId(libroAux, &editorialAux);
 
 				switch(editorialAux)
 							{

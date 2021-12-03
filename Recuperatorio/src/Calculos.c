@@ -12,16 +12,28 @@
 #include <string.h>
 
 
-int realizarDescuento(int* resultado, int precioADescontar, int descuento)
+int realizarDescuento( int precioADescontar, int descuento)
 {
-	int deteccion=-1;
+	int resultado;
+	float resultado2;
+	float porcentaje;
+	float resta;
+	float precioADescontarAux;
+	float descuentoFloat;
 
-	if(resultado!=NULL && precioADescontar!=NULL && descuento!=NULL)
-	{
-		*resultado=precioADescontar - (descuento / 10);
-		(int)*resultado;
-		deteccion=0;
-	}
 
-	return deteccion;
+	printf("\ndescuento: %d\n", descuento);
+	descuentoFloat=(float)descuento;
+	porcentaje = descuentoFloat/100;
+	printf("\nPorcentaje: %f\n", porcentaje);
+	precioADescontarAux=(float)precioADescontar;
+		resta=(porcentaje * precioADescontarAux);
+		printf("\nresta: %f\n", resta);
+
+		resultado2=precioADescontarAux - resta;
+		printf("Resultado:%f", resultado2);
+		resultado=(int)resultado2;
+
+
+	return resultado;
 }

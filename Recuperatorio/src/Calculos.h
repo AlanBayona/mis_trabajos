@@ -9,7 +9,7 @@
 #define CALCULOS_H_
 
 
-int realizarDescuento(int* resultado, int precioADescontar, int descuento);
+int realizarDescuento(int precioADescontar, int descuento);
 
 
 

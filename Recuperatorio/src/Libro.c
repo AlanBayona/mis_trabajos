@@ -238,7 +238,7 @@ int libro_getEditorialId(eLibro* this,int* editorialId)
 
 
 
-/*int OrdenarPorNombre(void* libroAnterior, void* libroPosterior)
+int OrdenarPorAutor(void* libroAnterior, void* libroPosterior)
 {
 	int ordenamiento=-4;
 	eLibro* libroAux=(eLibro*)libroAnterior;
@@ -252,7 +252,7 @@ int libro_getEditorialId(eLibro* this,int* editorialId)
 
 
 	return ordenamiento;
-}*/
+}
 
 
 
@@ -272,27 +272,22 @@ int hacerDescuento(void* libroAMapear)
 
 	if(libroAux!=NULL)
 	{
-		if(libro_getEditorialId(libroAux, editorialAux)==0 && libro_getPrecio(libroAux, precioADescontar)==0)
+		if(libro_getEditorialId(libroAux, &editorialAux)==0 && libro_getPrecio(libroAux, &precioADescontar)==0)
 		{
+			printf("\nPrecio: %d\n", precioADescontar);
 			if(editorialAux==PLANETA && precioADescontar>=300)
 			{
 				deteccion=0;
-				if(realizarDescuento(&precioConDescuento, precioADescontar, VEINTE_PORCIENTO)==0)
-				{
-					deteccion=1;
-				}
+				precioConDescuento=realizarDescuento( precioADescontar, VEINTE_PORCIENTO);
 
 			}
 			else if(editorialAux==SIGLO_XXI_EDITORES && precioADescontar<=200)
 			{
 				deteccion=0;
-				if(realizarDescuento(&precioConDescuento, precioADescontar, DIEZ_PORCIENTO)==0)
-				{
-					deteccion=-1;
-				}
+				precioConDescuento=realizarDescuento( precioADescontar, DIEZ_PORCIENTO);
 			}
-
-			if(deteccion==1)
+			printf("\nLo descontado es de: %d\n", precioConDescuento);
+			if(deteccion==0)
 			{
 				libro_setPrecio(libroAux, precioConDescuento);
 			}
@@ -305,33 +300,7 @@ int hacerDescuento(void* libroAMapear)
 
 
 
-int OrdenarPorAutor(void* libroAnterior, void* libroPosterior)
-{
-	int ordenamiento=0;
-	int autorUno;
-	int autorDos;
-	eLibro* libroAux=(eLibro*)libroAnterior;
-	eLibro* libroAux2=(eLibro*)libroPosterior;
 
-	if(libroAux!=NULL && libroAux2!=NULL)
-	{
-		if(libro_getAutor(libroAnterior, autorUno)==0 && libro_getAutor(libroPosterior, autorDos)==0)
-		{
-			if(autorUno>autorDos)
-			{
-				ordenamiento=1;
-			}
-			else if(autorDos>autorUno)
-			{
-				ordenamiento=-1;
-			}
-		}
-	}
-
-
-
-	return ordenamiento;
-}
 
 
 
@@ -346,11 +315,14 @@ int libro_filtrarPorEditorialMinotauro(void* pLibro)
 	int deteccion=-1;
 	int editorialAux;
 	eLibro* libroAFiltrar=(eLibro*)pLibro;
-	if(libroAFiltrar!=NULL && libro_getEditorialId(libroAFiltrar, editorialAux)==0)
+	if(libroAFiltrar!=NULL)
 	{
-		if(editorialAux!=MINOTAURO)
+		if(libro_getEditorialId(libroAFiltrar, &editorialAux)==0)
 		{
-			deteccion=0;
+			if(editorialAux!=MINOTAURO)
+			{
+				deteccion=0;
+			}
 		}
 	}
 

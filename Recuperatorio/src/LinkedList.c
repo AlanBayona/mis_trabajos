@@ -578,6 +578,52 @@ int ll_sort(LinkedList* this, int (*pFunc)(void*, void*), int orden)
 
 
 
+	if(this!=NULL && pFunc !=NULL && (orden==0 || orden==1))
+	{
+		while(disorderedState)
+		{
+			disorderedState=0;
+			for(i=0; i<ll_len(this)-1;i++)
+			{
+				pElement=ll_get(this, i);
+				pElement2=ll_get(this, i+1);
+				criterio=pFunc(pElement, pElement2);
+
+				if((orden==1 && criterio==1) || (orden==0 && criterio==-1))
+				{
+					ll_set(this, i, pElement2);
+					ll_set(this, i+1, pElement);
+					disorderedState=1;
+				}
+			}
+		}
+	}
+
+		return deteccion;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/*
+{
+	int deteccion=-1;
+	int i;
+	int disorderedState=1;
+	int criterio;
+	void* pElement;
+	void* pElement2;
+
+
+
 	if(this!=NULL && pFunc !=NULL && (orden==2 || orden==1))
 	{
 		puts("PAso el NUll");
@@ -632,10 +678,11 @@ int ll_sort(LinkedList* this, int (*pFunc)(void*, void*), int orden)
 		return deteccion;
 
 }
-
+*/
 
 LinkedList* ll_filter(LinkedList* this, int(*pFunc)(void*))
 {
+	puts("Dentro F");
 	int criterio;
 	void* pAux;
 	LinkedList* listaAFiltrar=NULL;
@@ -643,7 +690,7 @@ LinkedList* ll_filter(LinkedList* this, int(*pFunc)(void*))
 	if(this!=NULL && pFunc!=NULL)
 	{
 		listaAFiltrar=ll_clone(this);
-		for(int i=ll_len(this); i<0; i--)
+		for(int i=ll_len(this); i>0; i--)
 		{
 			pAux=ll_get(listaAFiltrar, i);
 
